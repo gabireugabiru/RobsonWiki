@@ -10,7 +10,6 @@ async fn guide() -> impl Responder {
    HttpResponse::Ok().body(include_str!("templates/guide.html")) 
 }
 
-
 #[actix_web::main] // or #[tokio::main]
 async fn main() -> std::io::Result<()> {
     let port = std::env::var("PORT").unwrap();
