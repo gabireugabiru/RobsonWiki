@@ -1,4 +1,4 @@
-use rocket::{response::content, fs::{FileServer, relative} };
+use rocket::{response::content, fs::{FileServer} };
 
 #[macro_use] extern crate rocket;
 
