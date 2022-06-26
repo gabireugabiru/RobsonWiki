@@ -13,5 +13,5 @@ fn guide() -> content::RawHtml<&'static str> {
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![index, guide]).mount("/static", FileServer::from(relative!("static")))
+    rocket::build().mount("/", routes![index, guide]).mount("/static", FileServer::from("/app/static"))
 }
