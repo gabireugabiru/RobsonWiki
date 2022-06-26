@@ -13,5 +13,7 @@ fn guide() -> content::RawHtml<&'static str> {
 
 #[launch]
 fn rocket() -> _ {
+    let a: Option<String> = None;
+    a.unwrap();
     rocket::build().mount("/", routes![index, guide]).mount("/static", FileServer::from("/app/static"))
 }
