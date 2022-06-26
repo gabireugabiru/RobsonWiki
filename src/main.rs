@@ -1,17 +1,28 @@
-use rocket::{response::content, fs::{FileServer} };
-
-#[macro_use] extern crate rocket;
+use actix_web::{get, web, App, HttpServer, Responder, HttpResponse};
 
 #[get("/")]
-fn index() -> content::RawHtml<&'static str> {
-    content::RawHtml(include_str!("templates/index.html"))
-}
-#[get("/guide")]
-fn guide() -> content::RawHtml<&'static str> {
-    content::RawHtml(include_str!("templates/guide.html"))    
+async fn index() -> impl Responder {
+    HttpResponse::Ok().body(include_str!("templates/index.html"))
 }
 
-#[launch]
-fn rocket() -> _ {
-    rocket::build().mount("/", routes![index, guide]).mount("/static", FileServer::from("/app/static"))
+#[get("/guide")]
+async fn guide() -> impl Responder {
+   HttpResponse::Ok().body(include_str!("templates/guide.html")) 
+}
+
+
+#[actix_web::main] // or #[tokio::main]
+async fn main() -> std::io::Result<()> {
+    let port = std::env::var("PORT").unwrap();
+    
+    HttpServer::new(|| {
+        App::new()
+        .service(actix_files::Files::new("/static", "/app/static") )
+            .route("/hello", web::get().to(|| async { "Hello World!" }))
+            .service(index)
+            .service(guide)
+    })
+    .bind(format!("0.0.0.0:{}", port))?
+    .run()
+    .await
 }
