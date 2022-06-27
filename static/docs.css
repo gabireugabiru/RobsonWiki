@@ -29,6 +29,7 @@ navbar {
     flex-direction: column;
 }
 #list > li {
+    font-weight: bolder;
     font-size: 2rem;
     color: #00ff33;
     transition: color 200ms;
@@ -88,8 +89,8 @@ main > section > div.memory > div + div {
 }
 main > section > div.memory > div > span.address {
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 7px;
+    top: 2px;
     font-size: .9rem;
 }
 main > section > div.memory > div > span.value {
@@ -111,4 +112,27 @@ main > section > button:hover {
 }
 .hidden {
     display: none;
+}
+
+main > section > div.code {
+    padding: 1rem;
+    background: rgb(36 40 36);
+    color: white;
+    border-radius: .6rem;
+    font-size: 1.7rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.keyword {
+    color: #e127e1;
+}
+.literal {
+    color: #dba035;
+}
+ol {
+   font-size: 1.7rem; 
+}
+ol > li + li {
+    margin-top: .6rem;
 }
