@@ -4,110 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/index.css">
     <title>Robson</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: "Alfa Slab One", serif;
-        }
-        body {
-            margin: 0;
-            background: #eee;
-        }
-        #root {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            padding: 1rem 4rem;
-            border-bottom: 1px solid rgba(0,0,0,.2);
-        }
-        ul.navbar {
-            list-style-type: none;
-            display: flex;
-            align-items: center;
-        }
-        ul.navbar > li {
-            font-size: 2rem;
-        }
-        ul.navbar > li + li  {
-            margin-left: 4rem; 
-        }
-        img.logo {
-            width: 100px;
-            height: auto;
-        }
-        a {
-            text-decoration: none;
-            color: #00ff33;
-            transition: 200ms;
-        }
-        a:hover {
-            color: #05bb2a; 
-        }
-        a.blue {
-            color: white;
-        }
-        div.presentation {
-            display: flex;
-            flex-direction: column;
-        }
-        div.presentation > p {
-            margin: 0 auto;
-            text-align: center;
-            font-size: 2rem;
-            max-width: 70%;
-        }
-        div.presentation > h1 {
-            font-size: 6rem;
-            text-align: center;
-        }
-        div.presentation > h1 > span {
-            font-size: 4rem;
-            font-weight: lighter;
-        }
-        div.why {
-            margin-top: 2rem;
-            background: #6f822b;
-            padding: 8rem 2rem;
-        }
-        div.why > h2 {
-            font-size: 5rem;
-        }
-        div.why > div{
-            margin-top: 4rem;
-            justify-content: center;
-            display: flex;
-        }
-        div.why > div > section {
-            text-align: justify;
-            width: 30%;
-            font-size: 1.7rem;
-            margin: 0 3%;
-            color: #ccc;
-        }
-        div.why > div > section > h3 {
-            font-size: 4rem;
-            text-align: center;
-        }
-        footer {
-            padding: 8rem;
-            font-size: 2rem;
-
-        }
-        footer > div {
-            display: flex;
-            align-items: center;
-        }
-        img.thumbs {
-            width: 64px;
-            margin: 0 2rem 20px 2rem;
-        }
-    </style>
 </head>
 <body>
     <div id="root">
@@ -115,7 +13,7 @@
             <img class="logo" src="/static/Robson.png" />
             <ul class="navbar" >
                 <li><a href="/docs">Docs</a></li>
-                <li><a href="https://github.com">Repository</a></li>
+                <li><a href="https://github.com/gabireugabiru/robson" target="_blank">Repository</a></li>
                 <li><a href="/guide">Getting Started</a></li>
             </ul>
         </header>
@@ -166,7 +64,7 @@
                         <div class="future">
                             Robson is a really new programming language and has a lot of to
                             go for, but its growing fast, with features coming frequently, feel 
-                            free to contribute <a class="blue" href = "https://github.com/">here</a>
+                            free to contribute <a class="blue" target="_blank" href = "https://github.com/gabireugabiru/robson">here</a>
                         </div>
                     </section>
                 </div>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/docs.css">
+    <script src="/static/docs.js" defer></script>
+    <title>Docs</title>
+</head>
+<body>
+    <div id="root">
+        <navbar>
+            <ul id="list">
+                <li id="Basic">
+                    Basic Concepts
+                </li>
+                <li id="Opcodes">
+                    Opcodes
+                </li>
+                <li id="Params">
+                    Params
+                </li>
+            </ul>
+        </navbar>
+        <main>
+            <section class="_Basic">
+                <h2>
+                    Basic Concepts                    
+                </h2>
+                <p>
+                    Before continue to learn robson, first you need to understand concepts of
+                    memory and stack, if you're ok with that skip that section.
+                </p>
+                <h2>
+                    Stack
+                </h2>
+                <p>
+                    The stack is basically an list of data that you access the top and adds to the top.<br>
+                    Exmaple:
+                </p>
+                <p>
+                    We have a 65 on the stack.
+                </p>
+                <div class="stack">
+                    <span>
+                        65
+                    </span>
+                </div>
+
+                <p>
+                    If we push 10 to the stack we will have:
+                </p>
+
+                <div class="stack">
+                    <span>
+                        65
+                    </span>
+                    <span>
+                        10
+                    </span>
+                </div>
+                <p>
+                    We only can add to the top of the stack, not the bottom nor the middle.
+                </p>
+                <p>
+                    If we pop that stack we will remove the top of it getting back only the 65.
+                </p>
+                <div class="stack">
+                    <span>
+                        65
+                    </span>
+                </div>
+
+                <p>
+                    Like adding, you can just remove the top of the stack.
+                </p>
+                <h2>
+                    Memory
+                </h2>
+                <p>
+                    The memory consists of data indexed by numbers like an vector/array.<br> 
+                    Example:
+                </p>
+                <div class="memory">
+                    <div>
+                        <span class="address">
+                           0 
+                        </span>
+                        <span class="value">
+                            0
+                        </span>
+                    </div>
+                    <div>
+                        <span class="address">
+                           1 
+                        </span>
+                        <span class="value">
+                            0
+                        </span>
+                    </div>
+                    <div>
+                        <span class="address">
+                           2 
+                        </span>
+                        <span class="value">
+                            0
+                        </span>
+                    </div>
+                </div>
+                <p>
+                    Unlike the stack, the memory you can read, add, and remove everything
+                    (within the scope of your application)
+                </p>
+                <p>
+                    So we can set the address 2 with the number 69, the memory will be as following
+                </p>
+                <div class="memory">
+                    <div>
+                        <span class="address">
+                           0 
+                        </span>
+                        <span class="value">
+                            0
+                        </span>
+                    </div>
+                    <div>
+                        <span class="address">
+                           1 
+                        </span>
+                        <span class="value">
+                            0
+                        </span>
+                    </div>
+                    <div>
+                        <span class="address">
+                           2 
+                        </span>
+                        <span class="value">
+                            69
+                        </span>
+                    </div>
+                </div>
+                <p>
+                    If you set more than one time the same address you will replace its value
+                </p>
+                <p>
+                    To there's no way that you can remove entirely the value of the memory, so 
+                    you set it to 0 in order to remove it
+                </p>
+
+                <button>
+                    Next                    
+                </button>
+            </section>
+            <section class="_Opcodes hidden">
+                <h2>
+                    Teste
+                </h2>
+                <button>
+                    Next                    
+                </button>
+            </section>
+            <section class="_Params hidden">
+                <h2>
+                    Teste1
+                </h2>       
+            </section>
+        </main>
+    </div>
+</body>
+</html>
