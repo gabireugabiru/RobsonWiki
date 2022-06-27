@@ -9,7 +9,10 @@ async fn index() -> impl Responder {
 async fn guide() -> impl Responder {
    HttpResponse::Ok().body(include_str!("templates/guide.html")) 
 }
-
+#[get("/docs")]
+async fn docs() -> impl Responder {
+    HttpResponse::Ok().body(include_str!("templates/docs.html"))
+}
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let port = std::env::var("PORT").unwrap();

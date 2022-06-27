@@ -27,6 +27,11 @@ ids.forEach((id, index, array) => {
 const element_id = (id) => document.querySelector(`section._${id}`);
 
 function hide_sections() {
+    window.scrollTo({
+        left: 0,
+        top: 0,
+        behavior: "smooth"
+    })
     for (const id of ids) {
         let element = element_id(id);
         if (element) {
