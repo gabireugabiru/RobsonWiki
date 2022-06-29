@@ -16,6 +16,10 @@ async fn docs() -> impl Responder {
 async fn versions() -> impl Responder {
     HttpResponse::Ok().body(include_str!("templates/versions.html"))
 }
+#[get("/interpreter")]
+async fn interpreter() -> impl Responder {
+    HttpResponse::Ok().body(include_str!("templates/interpreter.html"))
+}
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -35,6 +39,7 @@ async fn main() -> std::io::Result<()> {
             .service(guide)
             .service(docs)
             .service(versions)
+            .service(interpreter)
     })
     .bind(format!("0.0.0.0:{}", port))?
     .run()

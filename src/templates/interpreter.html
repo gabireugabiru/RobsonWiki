@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <textarea id="code"></textarea>
+    <button id="run"></button>
+    <input type="text" id="stdin">
+    <button id="enter">enter</button>
+    <div id="output">
+
+    </div>
+    <script type="module">
+        import init, { Teste } from "/static/robson_web.js";
+        const code = document.getElementById("code");
+        const run = document.getElementById("run");
+        run.onclick = () => {
+            console.log("teste");
+            init().then(() => {
+                let a = new Teste(code.value);
+                let is_running = false;
+                let has_input_been_handled = false;
+                let input = document.getElementById("stdin");
+                let enter = document.getElementById("enter");
+
+                enter.onclick = () => {
+                    if (!is_running) {
+                        a.set_stdin(input.value);
+                        has_input_been_handled = true;
+                        start_running();
+                    }
+                }
+
+                async function start_running() {
+                    is_running = true;
+                    while (true) {
+                        if (a.run_line()) {
+                            console.log("stopping");
+                            break;
+                        }
+                        const teste = a.stdout();
+                        console.log(a.opcode());
+                        if (a.opcode() == 6 && !has_input_been_handled) {
+                            is_running = false;
+                            console.log("waiting")
+                            break;
+                        }
+                        if (has_input_been_handled) {
+                            has_input_been_handled = false;
+                        }
+                        document.getElementById("output").innerHTML = teste;
+                    }
+                }
+                start_running();
+            });
+        }
+    </script>
+</body>
+
+</html>
