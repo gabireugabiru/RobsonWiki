@@ -1,4 +1,4 @@
-const ids = ["Basic", "Opcodes", "Params"];
+const ids = ["Basic", "Opcodes", "Params","Aliases", "Overview"];
 ids.forEach((id, index, array) => {
     const element = document.getElementById(id);
     if (element) {
@@ -40,4 +40,5 @@ function hide_sections() {
     }
 }
 
-
+const logo = document.getElementById("logo");
+logo.onclick = () => window.location.href = "/";

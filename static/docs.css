@@ -3,6 +3,7 @@
 }
 body {
     margin: 0;
+    background: #eee;
 }
 #root {
     width: 100%;
@@ -114,7 +115,7 @@ main > section > button:hover {
     display: none;
 }
 
-main > section > div.code {
+div.code {
     padding: 1rem;
     background: rgb(36 40 36);
     color: white;
@@ -130,9 +131,19 @@ main > section > div.code {
 .literal {
     color: #dba035;
 }
+.alias {
+    color: #5ddad4;
+}
 ol {
    font-size: 1.7rem; 
 }
 ol > li + li {
     margin-top: .6rem;
+}
+#logo {
+    position: absolute;
+    left: 70px;
+    bottom: 70px;
+    width: 100px;
+    cursor: pointer
 }

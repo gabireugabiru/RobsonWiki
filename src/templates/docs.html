@@ -21,7 +21,14 @@
                 <li id="Params">
                     Params
                 </li>
+                <li id="Aliases">
+                    Aliases
+                </li>
+                <li id="Overview">
+                    Overview
+                </li>
             </ul>
+            <img src="/static/Robson.png" id="logo">
         </navbar>
         <main>
             <section class="_Basic">
@@ -196,8 +203,277 @@
             </section>
             <section class="_Params hidden">
                 <h2>
-                    Work in progress...
-                </h2>       
+                    Params
+                </h2>
+                <p>
+                    Params are data that you pass for commands, they can originate for bascially anywhere, from the memory, 
+                    from the stack or more commonly, hardcoded
+                </p>
+                <div class="code">
+                    <span class="keyword"> robson robson rosbon </span>
+                    <span> comeu <span class="literal">94</span> </span>
+                </div>
+                <p>
+                    In the example above, the "comeu" keyword is saying that the value is hardcoded number, 
+                    for representing floating points ou signed ints, use a f{number} and i{number}, respectively  
+                </p>
+                <p>
+                    Now lets dive in a more complex code
+                </p>
+
+                <div class="code">
+                    <span class="keyword">
+                        robson robson robson
+                    </span>
+                    <span>comeu <span class="literal">f12.6</span></span>
+                    <span class="keyword"> robson robson robson robson robson robson robson robson robson robson</span>
+                    <span>comeu <span class="literal">0</span></span>
+                    <span class="keyword">robson</span>
+                    <span>fudeu <span class="literal">0</span></span>
+                    <span>comeu <span class="literal">f1.1</span></span>
+                    <span class="keyword">robson robson robson robson robson robson robson robson</span>
+                </div>
+                <p>
+                    In this example we are settings the value 12.6 into the address 0,
+                    then adding the value 1.1 and value from address 0, for the finale
+                    printing it to the screen
+                </p>
+                <p>
+                    Now let's go through this bit by bit
+                </p>
+                <p>
+                    In the first command we're adding 12.6 to the stack
+                </p>
+                <p>
+                    In the seccond we're setting setting the top of the stack 
+                    to the address 0
+                </p>
+                <p>
+                    For the third, we see a "fudeu", fudeu basically is equivalent of the value
+                    from the address specified, in that case address 0.
+                    In the third command we're adding the two parameters and pushing to stack the result
+                </p>
+                <p>
+                    the last command just print the number to the screen
+                </p>
+                <p>
+                    Worth mention the "chupou" keyword, it is used when you wanna
+                    pass a value from the stack to a param,
+                    normally used as "chupou 0", but you colud use other numbers 
+                    to reach into the stack, but its highly insecure, <span class="literal">!!It doesnt pop from the stack!!</span>
+                </p>
+                <button>Next</button>
+            </section>
+            <section class="_Aliases hidden">
+                <h2>
+                    Aliases
+                </h2>
+                <p>
+                    A lot of times, you wanna jump around in your program, and using the lines as an argument
+                    may not be such an effective method, so robson has aliases,
+                    aliases are names that you choose for the program to remember certain parts of your program
+                    instead of hardcoding its location
+                </p>
+                <p>
+                    Example: 
+                </p>
+
+                <div class="code">
+                    <span class="keyword">robson robson robson</span>
+                    <span>comeu <span class="literal">69</span></span>
+                    <span class="keyword">robson robson robson robson robson robson robson robson robson </span>
+                    <span>lambeu <span class="alias">:alias</span></span>
+                    <span class="keyword">robson robson robson robson robson robson robson</span>
+                    <span class="alias">alias:</span>
+                    <span class="keyword">robson robson robson robson robson robson robson robson</span>
+                </div>
+                <p>
+                    In this example in the seccond command, we jump to the position of the alias,
+                    completely skiping the third command. this could easly be solved without an alias with
+                </p>
+                <div class="code">
+                    <span class="keyword">robson robson robson</span>
+                    <span>comeu <span class="literal">69</span></span>
+                    <span class="keyword">robson robson robson robson robson robson robson robson robson </span>
+                    <span>comeu <span class="literal">6</span></span>
+                    <span class="keyword">robson robson robson robson robson robson robson</span>
+                    <span class="keyword">robson robson robson robson robson robson robson robson</span>
+                </div>
+                <p>
+                    On the surface this seems better code, as it has less lines, 
+                    but this code is not maintainable, couse if you for some reason
+                    add more lines of code before that, the code is gonna be on undefined behavior
+                    since we dont know what could be in line 6
+                </p>
+                <p>
+                    This is the end of the guide on Robson, if you wanna an overview of the 
+                    language commands continue
+                </p>
+                <button>Next</button>
+            </section>
+            <section class="_Overview hidden">
+                <h2>
+                    Overview
+                </h2>
+                <ol>
+                    <li>
+                        <h4>Simple sum: </h4>
+                        <p>
+                            Has two params, push the sum of the two params to the stack, example:
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson</span>
+                            <span>comeu <span class="literal">2</span></span>
+                            <span>comeu <span class="literal">4</span></span>
+                        </div>
+                        
+                    </li>
+                    <li>
+                        <h4>Simple subtraction: </h4>
+                        <p>
+                            Has two params, push the subtraction of the first with the seccond parameter, exmaple:
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson</span>
+                            <span>comeu <span class="literal">5</span></span>
+                            <span>comeu <span class="literal">4</span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <h4>Push to the stack</h4>
+                        <p>
+                            Has one parameter, push its param to the stack, it has a
+                            handy syntax simplification on multiple push, example:
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson</span>
+                            <span>comeu <span class="literal">10</span></span>
+                            <span class="keyword">robson robson robson</span>
+                            <span>comeu <span class="literal">65</span></span>
+                        </div>
+                        <p>
+                            Can be written as:
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson</span>
+                            <span>comeu <span class="literal">10</span></span>
+                            <span>comeu <span class="literal">65</span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <h4>
+                            If equal     
+                        </h4>
+                        <p>
+                            Has three  params, is the first param is equal to the third param, jump to third param, example:
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson robson</span>
+                            <span>comeu <span class="literal">10</span></span>
+                            <span>comeu <span class="literal">10</span></span>
+                            <span>lambeu <span class="alias">:some_alias</span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <h4>Verify stack and jump</h4>
+                        <p>
+                            Has one parameter, if the stack is empty jump to the param, example:
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson robson robson</span>
+                            <span>lambeu <span class="alias">:some_alias</span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <h4>Input user</h4>
+                        <p>
+                            Has three parameters, first the location to store the data, 
+                            seccond its type (0 text, 1 integer), 
+                            third the limit that can be supplied for the user
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson robson robson robson</span>
+                            <span>comeu <span class="literal">0</span></span>
+                            <span>comeu <span class="literal">0</span></span>
+                            <span>comeu <span class="literal">100</span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <h4>
+                            Print ASCII
+                        </h4>
+                        <p>
+                            Has no parameter, print the top of the stack as ascii, example:
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson</span>
+                            <span>comeu <span class="literal">65</span></span>
+                            <span class="keyword">robson robson robson robson robson robson robson</span>
+                        </div> 
+                    </li>
+                    <li>
+                        <h4>
+                            Print Number
+                        </h4>
+                        <p>
+                            Has no parameter, print the top of the stack as a number, example:
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson</span>
+                            <span>comeu <span class="literal">65</span></span>
+                            <span class="keyword">robson robson robson robson robson robson robson robson</span>
+                        </div> 
+                    </li>
+                    <li>
+                        <h4>
+                            Jump
+                        </h4>
+                        <p>
+                            Has one parameter, jump to the location of its parameter, exmaple:
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson robson robson robson robson robson robson</span>
+                            <span>lambeu <span class="alias">:some_alias</span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <h4>
+                            Set to memory
+                        </h4>
+                        <p>
+                            Has one parameter, set the top of the stack to the address of its parameter 
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson</span>
+                            <span>comeu <span class="literal">69</span></span>
+                            <span class="keyword">robson robson robson robson robson robson robson robson robson robson</span>
+                            <span>comeu <span class="literal">0</span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <h4>
+                            Pop stack
+                        </h4>
+                        <p>
+                            Has no parameter
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson robson robson robson robson robson robson robson robson</span>
+                        </div>
+                    </li>
+                    <li>
+                        <h4>
+                            Load string
+                        </h4>
+                        <p>
+                            Has one parameter, read the memory values from address of parameter until '\0', and adds it to stack in reverse
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson robson robson robson robson robson robson robson robson robson</span>
+                            <span>comeu <span class="literal">0</span></span>
+                        </div>
+                    </li>
+                </ol>
             </section>
         </main>
     </div>
