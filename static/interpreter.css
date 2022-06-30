@@ -1,0 +1,145 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+#root {
+    width: 100%;
+    height: 100vh;
+}
+
+#logo {
+    cursor: pointer;
+}
+
+#code {
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    top: 5px;
+    bottom: 5px;
+    caret-color: #fff;
+    color: transparent;
+    outline: none;
+    overflow-y: auto;
+}
+
+#syntax {
+    width: 100%;
+    height: calc(50vh - 75px);
+    background: #242824;
+    position: relative;
+    font-size: 1.7rem;
+}
+
+
+#formated {
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    top: 5px;
+    bottom: 5px;
+    color: white;
+    background: transparent;
+    overflow-y: hidden;
+}
+
+#output {
+    width: 100%;
+    height: calc(50vh - 50px);
+    background: #242824;
+    white-space: pre-line;
+    color: white;
+    font-size: 1.7rem;
+    padding: 10px;
+    overflow: auto;
+}
+
+header {
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,.2);
+    align-items: center;
+}
+a {
+    font-size: 2rem;
+    text-decoration: none;
+    color: #00ff33;
+    transition: color 200ms;
+}
+a:hover {
+    color: #05bb2a; 
+}
+
+.row {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+.row > div > div {
+    font-size: 2rem;
+    font-weight: bolder;
+    display: grid;
+    place-items: center;
+    margin-left: 10px;
+}
+.row > div {
+    display: flex;
+    height: 100%;
+}
+.row > div:first {
+    width: 30%;
+}
+.row > div:last-child {
+    width: 70%;
+}
+.row > div > button {
+    height: 100%;
+    width: 100px;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    background: rgb(206, 120, 0);
+    cursor: pointer;
+    transition: background 200ms;
+}
+.row > div > button:hover {
+    background:rgb(159, 95, 4);
+}
+.row > div > input {
+    width: 100%;
+    height:100%;
+    border: none;
+    border-left: 1px solid rgba(0,0,0,.2);
+    outline: none;
+    font-size: 2rem;
+}
+.row > div >input:focus {
+    border-bottom: 3px solid #00ff33;
+}
+.keyword {
+    color: #e127e1;
+}
+
+.literal {
+    color: #dba035;
+}
+
+.alias {
+    color: #5ddad4;
+}
+.running {
+    color: #078c07;
+}
+.finished {
+    color: #f42222;
+}
+.waiting {
+    color: #f0b906;
+}

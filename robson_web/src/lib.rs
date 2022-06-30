@@ -10,6 +10,13 @@ use utils::{
   approx_equal, f32_add, f32_sub, i32_add, i32_sub, u32_add, u32_sub,
 };
 use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+extern "C" {
+  #[wasm_bindgen]
+  fn alert(i: &str);
+}
+
 #[derive(Debug)]
 
 pub struct Infra {
@@ -28,11 +35,12 @@ impl Infra {
       None
     } else {
       let value = self.stdin.clone();
+      self.stdout.push_str(&format!("{}\n", value));
       Some(value)
     }
   }
   pub fn print(&mut self, to_print: String) {
-    self.stdout.push_str(&to_print.replace("\n", "<br>"));
+    self.stdout.push_str(&to_print);
   }
 }
 
@@ -612,35 +620,29 @@ impl Interpreter {
   }
 }
 
-#[wasm_bindgen]
-extern "C" {
-  #[wasm_bindgen]
-  fn alert(i: &str);
-}
 
 #[wasm_bindgen]
-pub struct Teste {
+pub struct Communication {
   v: Interpreter,
 }
 
 #[wasm_bindgen]
-impl Teste {
+impl Communication {
   #[wasm_bindgen(constructor)]
-  pub fn new(code: String) -> Teste {
-    let code = code.lines().map(|a| a.to_owned()).collect();
+  pub fn new(code: String) -> Communication {
+    let code = code.lines().map(|a| a.replace('\u{a0}', " ")).collect();
     let mut interpreter =
       Interpreter::new(code, 200, Infra::new()).unwrap();
     interpreter.start_alias();
-    Teste { v: interpreter }
+    Communication { v: interpreter }
   }
 
   #[wasm_bindgen(method)]
-  pub fn run_line(&mut self) -> bool {
+  pub fn run_line(&mut self) -> Option<String> {
     match self.v.execute_line() {
-      Ok(_) => false,
+      Ok(_) => None,
       Err(err) => {
-        alert(&format!("{}", err));
-        true
+        Some(format!("\n<span class='finished'>-------------\n{}\n-------------</span>", err))
       }
     }
   }
