@@ -137,6 +137,9 @@ a:hover {
 .running {
     color: #078c07;
 }
+.type {
+    color: #e5c07b;
+}
 .finished {
     color: #f42222;
 }

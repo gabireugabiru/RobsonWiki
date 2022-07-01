@@ -7,6 +7,22 @@ init().then(() => {
     const syntax = document.getElementById("syntax");
     const status = document.getElementById("status");
     const output = document.getElementById("output");
+    const reset_button = document.getElementById("reset");
+    const local_code = localStorage.getItem("code");
+
+    function highlight() {
+        formated.innerHTML = code.innerHTML
+        .replace("\n", "<br>")
+        .replace(/(robson)/g, "<span class='keyword'>$1</span>")
+        .replace(/(\w+\b:)/g, "<span class='alias'>$1</span>")
+        .replace(/(\w*:\b\w+)/g, "<span class='alias'>$1</span>")
+        .replace(/(f[0-9]|.[0-9]|[0-9]|i[0-9])/g, "<span class='literal'>$1</span>")
+        .replace(/(comeu|fudeu|lambeu|chupou)/g, "<span class='type'>$1</span>")
+    }
+    function reset() {
+        code.innerHTML = ";setting data<br>robson robson robson<br>comeu 100<br>comeu 108<br>comeu 114<br>comeu 111<br>comeu 119<br>comeu 32<br>comeu 111<br>comeu 108<br>comeu 108<br>comeu 101<br>comeu 72<br>;printing<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>"
+        highlight();
+    }
 
     function waiting() {
         status.setAttribute("class", "waiting");
@@ -20,8 +36,17 @@ init().then(() => {
         status.setAttribute("class", "finished");
         status.innerHTML = "Finished"
     }
+    
+    if (local_code) {
+        code.innerHTML = local_code;
+        highlight();
+    } else {
+        reset();
+    }
 
-    code.innerHTML = "";
+
+    reset_button.onclick = () => reset();
+
     syntax.onclick = () => code.focus();
 
     code.onscroll = (ev) => {
@@ -31,12 +56,8 @@ init().then(() => {
     }
 
     code.oninput = (ev) => {
-        formated.innerHTML = ev.target.innerHTML
-            .replace("\n", "<br>")
-            .replace(/(\w+\b:)/g, "<span class='alias'>$1</span>")
-            .replace(/(\w*:\b\w+)/g, "<span class='alias'>$1</span>")
-            .replace(/(robson)/g, "<span class='keyword'>$1</span>")
-            .replace(/(f[0-9]|.[0-9]|[0-9]|i[0-9])/g, "<span class='literal'>$1</span>")
+        highlight();
+        localStorage.setItem("code", ev.target.innerHTML);    
     }
 
     run.onclick = () => {
