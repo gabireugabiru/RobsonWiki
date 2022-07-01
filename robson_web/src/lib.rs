@@ -630,7 +630,13 @@ pub struct Communication {
 impl Communication {
   #[wasm_bindgen(constructor)]
   pub fn new(code: String) -> Communication {
-    let code = code.lines().map(|a| a.replace('\u{a0}', " ")).collect();
+    let code = code.lines().flat_map(|a| {
+      if a.trim().is_empty() {
+        None
+      } else {
+        Some(a.replace('\u{a0}', " "))
+      }
+    }).collect();
     let mut interpreter =
       Interpreter::new(code, 200, Infra::new()).unwrap();
     interpreter.start_alias();

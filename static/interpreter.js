@@ -1,14 +1,25 @@
 import init, { Communication } from "/static/robson_web.js";
+
+const code = document.getElementById("code");
+const run = document.getElementById("run");
+const formated = document.getElementById("formated");
+const syntax = document.getElementById("syntax");
+const status = document.getElementById("status");
+const output = document.getElementById("output");
+const reset_button = document.getElementById("reset");
+const local_code = localStorage.getItem("code");
+const input = document.getElementById("stdin");
+const enter = document.getElementById("enter");
+
+if (navigator.userAgent.includes("Mobile") || navigator.userAgent.includes("Android")) {
+    code.setAttribute("style", "color: white;");
+    formated.setAttribute("style", "display: none;")
+}
+
 document.getElementById("logo").onclick = () => window.location.href = "/";
+
 init().then(() => {
-    const code = document.getElementById("code");
-    const run = document.getElementById("run");
-    const formated = document.getElementById("formated");
-    const syntax = document.getElementById("syntax");
-    const status = document.getElementById("status");
-    const output = document.getElementById("output");
-    const reset_button = document.getElementById("reset");
-    const local_code = localStorage.getItem("code");
+
 
     function highlight() {
         formated.innerHTML = code.innerHTML
@@ -49,6 +60,12 @@ init().then(() => {
 
     syntax.onclick = () => code.focus();
 
+    input.onkeyup = (ev) => {
+        if (ev.code == "Enter") {
+            enter.click();
+        }
+    }
+
     code.onscroll = (ev) => {
         formated.scrollTo({
             top: ev.target.scrollTop
@@ -65,8 +82,7 @@ init().then(() => {
         let interpreter = new Communication(code.innerText);
         let is_running = false;
         let has_input_been_handled = false;
-        let input = document.getElementById("stdin");
-        let enter = document.getElementById("enter");
+
 
         enter.onclick = () => {
             if (!is_running) {
@@ -93,6 +109,7 @@ init().then(() => {
                 if (interpreter.opcode() == 6 && !has_input_been_handled) {
                     is_running = false;
                     waiting();
+                    input.focus();
                     break;
                 }
                 if (has_input_been_handled) {

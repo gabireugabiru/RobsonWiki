@@ -42,3 +42,11 @@ function hide_sections() {
 
 const logo = document.getElementById("logo");
 logo.onclick = () => window.location.href = "/";
+const navbar = document.querySelector("navbar");
+
+document.getElementById("outside").onclick = () => {
+    navbar.setAttribute("class", "open");
+}
+document.getElementById("inside").onclick = () => {
+    navbar.setAttribute("class", "");
+}

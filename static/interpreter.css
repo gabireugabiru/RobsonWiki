@@ -16,6 +16,7 @@ body {
 }
 
 #code {
+    font-size: 1.7rem;
     position: absolute;
     left: 5px;
     right: 5px;
@@ -29,7 +30,7 @@ body {
 
 #syntax {
     width: 100%;
-    height: calc(50vh - 75px);
+    height: calc(70vh - 75px);
     background: #242824;
     position: relative;
     font-size: 1.7rem;
@@ -37,6 +38,7 @@ body {
 
 
 #formated {
+    font-size: 1.7rem;
     position: absolute;
     left: 5px;
     right: 5px;
@@ -44,12 +46,13 @@ body {
     bottom: 5px;
     color: white;
     background: transparent;
+    word-wrap: break-word;
     overflow-y: hidden;
 }
 
 #output {
     width: 100%;
-    height: calc(50vh - 50px);
+    height: calc(30vh - 50px);
     background: #242824;
     white-space: pre-line;
     color: white;
@@ -97,7 +100,7 @@ a:hover {
     width: 30%;
 }
 .row > div:last-child {
-    width: 70%;
+    width: 60%;
 }
 .row > div > button {
     height: 100%;
@@ -145,4 +148,15 @@ a:hover {
 }
 .waiting {
     color: #f0b906;
+}
+@media only screen and (max-width: 1100px) {
+    html {
+        font-size: 75%;
+    }
+}
+@media only screen and (max-width: 550px) {
+    html {
+        font-size: 50%;
+    }
+
 }

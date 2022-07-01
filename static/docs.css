@@ -12,12 +12,13 @@ body {
 navbar {
     display: flex;
     width: 250px;
-    margin: 1rem 0;
-    padding: 1rem 1rem;
+    padding: 1.5rem;
     position: fixed;
     left: 0;
     top: 0;
     bottom: 0;
+    background: #eee;
+    z-index: 2;
     border-right: 1px solid rgba(0, 0, 0, .2);
 }
 
@@ -146,4 +147,72 @@ ol > li + li {
     bottom: 70px;
     width: 100px;
     cursor: pointer
+}
+
+
+@media only screen and (max-width: 1100px) {
+
+    html {
+        font-size: 75%;
+    }
+    navbar {
+        width: 190px;
+    }
+    main {
+        width: calc(100% - 190px);
+        margin-left: 190px;
+    }
+    #logo {
+        left: 35px;
+        bottom: 35px;
+    }
+
+}
+@media only screen and (max-width: 900px) {
+
+}
+@media only screen and (max-width: 675px) {
+    
+    html {
+        font-size: 60%;
+    }
+    navbar {
+        width: 170px;
+        left: -170px;
+        transition: left 200ms;
+        display: flex;
+        flex-direction: column;
+    }
+    navbar.open {
+        left: 0;
+    }
+    main {
+        width: 100%;
+        margin-left: 0;
+    }
+    button {
+        border: none;
+        background: none;
+        margin: 0;
+        color:#00ff33;
+        transition: color 200ms;
+    }
+    button:hover {
+        color:#05bb2a;
+    }
+    #inside {
+        display: block;
+        margin: 3rem 1rem;
+        font-size: 4rem;
+    }
+    #outside {
+        display: block;
+        margin: 3rem 1rem;
+        font-size: 4rem;
+    }
+    #logo {
+        left: 25px;
+        bottom: 25px;
+    }
+    
 }
