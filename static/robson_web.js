@@ -81,9 +81,6 @@ function getInt32Memory0() {
 }
 /**
 */
-export const Type = Object.freeze({ Usigned:0,"0":"Usigned",Signed:1,"1":"Signed",Floating:2,"2":"Floating", });
-/**
-*/
 export class Communication {
 
     static __wrap(ptr) {
@@ -161,38 +158,6 @@ export class Communication {
     opcode() {
         const ret = wasm.communication_opcode(this.ptr);
         return ret;
-    }
-}
-/**
-*/
-export class Stack {
-
-    __destroy_into_raw() {
-        const ptr = this.ptr;
-        this.ptr = 0;
-
-        return ptr;
-    }
-
-    free() {
-        const ptr = this.__destroy_into_raw();
-        wasm.__wbg_stack_free(ptr);
-    }
-}
-/**
-*/
-export class TypedByte {
-
-    __destroy_into_raw() {
-        const ptr = this.ptr;
-        this.ptr = 0;
-
-        return ptr;
-    }
-
-    free() {
-        const ptr = this.__destroy_into_raw();
-        wasm.__wbg_typedbyte_free(ptr);
     }
 }
 

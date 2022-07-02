@@ -8,6 +8,11 @@ const versions = [
         version: "0.0.6",
         windows: "/static/versions/0.0.6vWindows.zip",
         linux: "/static/versions/0.0.6vLinux.zip"
+    },
+    {
+        version: "0.0.7",
+        windows: "/static/versions/0.0.7vWindows.zip",
+        linux: "/static/versions/0.0.7vLinux.zip"
     }
 ];
 const list = document.getElementById("list");

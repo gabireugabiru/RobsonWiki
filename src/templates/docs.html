@@ -191,10 +191,10 @@
                     List of opcodes
                 </h2>
                 <ol class="opcode_list">
-                    <li>Simple sum </li>
-                    <li>Simple subtraction</li>
+                    <li>Operations like sum and subtraction</li>
+                    <li>If lower jump</li>
                     <li>Push to stack</li>
-                    <li>If jump</li>
+                    <li>If equal jump</li>
                     <li>Verify stack jump</li>
                     <li>User input</li>
                     <li>Print ascii</li>
@@ -239,6 +239,7 @@
                     <span class="keyword"> robson robson robson robson robson robson robson robson robson robson</span>
                     <span>comeu <span class="literal">0</span></span>
                     <span class="keyword">robson</span>
+                    <span>comeu <span class="literal">0</span></span>
                     <span>fudeu <span class="literal">0</span></span>
                     <span>comeu <span class="literal">f1.1</span></span>
                     <span class="keyword">robson robson robson robson robson robson robson robson</span>
@@ -261,7 +262,7 @@
                 <p>
                     For the third, we see a "fudeu", fudeu basically is equivalent of the value
                     from the address specified, in that case address 0.
-                    In the third command we're adding the two parameters and pushing to stack the result
+                    In this command we're adding the two last parameters and pushing to stack the result
                 </p>
                 <p>
                     the last command just print the number to the screen
@@ -327,26 +328,57 @@
                 </h2>
                 <ol>
                     <li>
-                        <h4>Simple sum: </h4>
+                        <h4>Operations: </h4>
                         <p>
-                            Has two params, push the sum of the two params to the stack, example:
+                            Has tree params, the first is the operation and the other two are the values, exmaples:
+                        </p>
+                        <p>
+                            Sum:
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson</span>
+                            <span>comeu <span class="literal">0</span></span>
+                            <span>comeu <span class="literal">2</span></span>
+                            <span>comeu <span class="literal">4</span></span>
+                        </div>
+                        <p>
+                            Subtraction:
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson</span>
+                            <span>comeu <span class="literal">1</span></span>
+                            <span>comeu <span class="literal">5</span></span>
+                            <span>comeu <span class="literal">4</span></span>
+                        </div>
+                        <p>
+                            Multiplication:
                         </p>
                         <div class="code">
                             <span class="keyword">robson</span>
                             <span>comeu <span class="literal">2</span></span>
-                            <span>comeu <span class="literal">4</span></span>
+                            <span>comeu <span class="literal">2</span></span>
+                            <span>comeu <span class="literal">3</span></span>
                         </div>
-                        
+                        <p>
+                            Division:
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson</span>
+                            <span>comeu <span class="literal">3</span></span>
+                            <span>comeu <span class="literal">8</span></span>
+                            <span>comeu <span class="literal">2</span></span>
+                        </div>
                     </li>
                     <li>
-                        <h4>Simple subtraction: </h4>
+                        <h4>If lower jump</h4>
                         <p>
-                            Has two params, push the subtraction of the first with the seccond parameter, exmaple:
+                            Has three params, if the first param is lower than the seccond jump to third param 
                         </p>
                         <div class="code">
                             <span class="keyword">robson robson</span>
-                            <span>comeu <span class="literal">5</span></span>
+                            <span>comeu <span class="literal">1</span></span>
                             <span>comeu <span class="literal">4</span></span>
+                            <span>lambeu <span class="alias">:some_alias</span></span>
                         </div>
                     </li>
                     <li>

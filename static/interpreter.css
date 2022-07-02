@@ -129,7 +129,6 @@ a:hover {
 .keyword {
     color: #e127e1;
 }
-
 .literal {
     color: #dba035;
 }
@@ -137,6 +136,7 @@ a:hover {
 .alias {
     color: #5ddad4;
 }
+
 .running {
     color: #078c07;
 }

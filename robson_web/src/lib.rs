@@ -8,6 +8,8 @@ use std::{
 };
 use utils::{
   approx_equal, f32_add, f32_sub, i32_add, i32_sub, u32_add, u32_sub,
+  f32_div, f32_mul, i32_div, i32_mul, u32_div, u32_mul,
+
 };
 use wasm_bindgen::prelude::*;
 
@@ -30,14 +32,17 @@ impl Infra {
       stdout: String::new(),
     }
   }
-  pub fn read_line(&mut self) -> Option<String> {
+  pub fn read_line(&mut self) -> Result<String, std::io::Error> {
     if self.stdin.is_empty() {
-      None
+      Err(std::io::Error::new(std::io::ErrorKind::NotFound, "couldnt found input"))
     } else {
       let value = self.stdin.clone();
       self.stdout.push_str(&format!("{}\n", value));
-      Some(value)
+      Ok(value)
     }
+  }
+  pub fn println(&mut self, to_print: String) {
+    self.stdout.push_str(&format!("{}\n", to_print));
   }
   pub fn print(&mut self, to_print: String) {
     self.stdout.push_str(&to_print);
@@ -64,8 +69,6 @@ impl Display for IError {
   }
 }
 impl Error for IError {}
-
-#[wasm_bindgen]
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
 pub struct TypedByte {
   value: [u8; 4],
@@ -101,7 +104,6 @@ impl Deref for TypedByte {
     &self.value
   }
 }
-
 impl TypedByte {
   pub fn force_u32(&self, pos: usize) -> Result<u32, Box<dyn Error>> {
     if self.r#type != Type::Usigned {
@@ -115,12 +117,10 @@ impl TypedByte {
   }
 }
 
-#[wasm_bindgen]
 #[derive(Default, Debug)]
 pub struct Stack {
   vec: Vec<TypedByte>,
 }
-
 impl Deref for Stack {
   type Target = Vec<TypedByte>;
   fn deref(&self) -> &Self::Target {
@@ -132,7 +132,6 @@ impl DerefMut for Stack {
     &mut self.vec
   }
 }
-
 impl Stack {
   pub fn top(&self) -> Result<TypedByte, Box<dyn Error>> {
     if !self.vec.is_empty() {
@@ -144,32 +143,29 @@ impl Stack {
     }
   }
 }
-
-#[wasm_bindgen]
 #[derive(Clone, Copy, PartialEq, Debug, Eq, PartialOrd)]
 pub enum Type {
   Usigned,
   Signed,
   Floating,
 }
-
 impl Default for Type {
   fn default() -> Self {
     Self::Usigned
   }
 }
-
 pub struct Interpreter {
-  pub memory: Vec<TypedByte>,
-  pub stack: Stack,
-  pub lines: Vec<String>,
-  pub opcode_params: [u8; 14],
-  pub names: HashMap<String, usize>,
-  pub pos: usize,
-  pub debug: bool,
-  pub infra: Infra,
-  pub last_opcode: u8,
-  pub used_input: i64,
+  memory: Vec<TypedByte>,
+  stack: Stack,
+  lines: Vec<String>,
+  opcode_params: [u8; 14],
+  names: HashMap<String, usize>,
+  pos: usize,
+  debug: bool,
+  infra: Infra,
+  last_opcode: u8,
+  #[cfg(any(target_arch = "wasm32", target_arch = "wasm64"))]
+  used_input: i64
 }
 
 impl Interpreter {
@@ -178,6 +174,7 @@ impl Interpreter {
     limit: usize,
     infra: Infra,
   ) -> Result<Self, Box<dyn Error>> {
+    
     Ok(Self {
       memory: vec![
         TypedByte {
@@ -188,12 +185,13 @@ impl Interpreter {
       ],
       stack: Stack::default(),
       lines: code,
-      opcode_params: [0, 2, 2, 1, 3, 1, 3, 0, 0, 1, 1, 1, 1, 0],
+      opcode_params: [0, 3, 3, 1, 3, 1, 3, 0, 0, 1, 1, 1, 1, 0],
       pos: 0,
       debug: false,
       names: HashMap::new(),
       infra,
       last_opcode: 0,
+      #[cfg(target_arch = "wasm32")]
       used_input: -1,
     })
   }
@@ -210,9 +208,11 @@ impl Interpreter {
     res
   }
 
-  pub fn execute_line(&mut self) -> Result<(), Box<dyn Error>> {
+  pub fn execute_line(
+    &mut self,
+  ) -> Result<Option<()>, Box<dyn Error>> {
     if self.verify_index_overflow(self.pos) {
-      return Err(IError::message("Program ended"));
+      return Ok(Some(()));
     }
     let pre_string = self.lines[self.pos].to_owned();
     let mut string = pre_string.trim();
@@ -221,16 +221,14 @@ impl Interpreter {
 
     // skip aliases
     if string.contains(':') {
-      self.last_opcode = 0;
       self.pos += 1;
-      return Ok(());
+      return Ok(None);
     }
 
     // //skip spaces
     if string.trim().is_empty() {
-      self.last_opcode = 0;
       self.pos += 1;
-      return Ok(());
+      return Ok(None);
     }
 
     // Implements the push abreviation
@@ -240,7 +238,7 @@ impl Interpreter {
     {
       self.command(3, string, "", "")?;
       self.pos += 1;
-      return Ok(());
+      return Ok(None);
     }
 
     //get params and opcodes
@@ -261,11 +259,12 @@ impl Interpreter {
       opcode += 1;
     }
 
+    #[cfg(any(target_arch = "wasm32", target_arch = "wasm64"))]
     if opcode == 6 {
       if self.used_input != self.pos as i64 {
         self.last_opcode = 6;
         self.used_input = self.pos as i64;
-        return Ok(());
+        return Ok(None);
       }
     }
 
@@ -287,18 +286,19 @@ impl Interpreter {
       }
       params[i as usize] = string;
     }
+
     //update and run command
     self.pos += 1;
     if self.debug {
-      self.infra.print(format!("\npos: {}\n", self.pos));
-      self.infra.print(format!("opcode: {}\n", opcode));
-      self.infra.print(format!("count: {}\n", param_count));
-      self.infra.print(format!(
-        "params: {}, {}, {}\n",
+      self.infra.println(format!("\npos: {}", self.pos));
+      self.infra.println(format!("opcode: {}", opcode));
+      self.infra.println(format!("count: {}", param_count));
+      self.infra.println(format!(
+        "params: {}, {}, {}",
         params[0], params[1], params[2]
       ));
-      self.infra.print(format!("string '{}'", string));
-      self.infra.print(format!("stack {:?}", self.stack.vec));
+      self.infra.println(format!("string '{}'", string));
+      self.infra.println(format!("stack {:?}", self.stack.vec));
     }
     self.last_opcode = opcode;
     self.command(
@@ -307,7 +307,7 @@ impl Interpreter {
       Self::remove_comments(&params[1]),
       Self::remove_comments(&params[2]),
     )?;
-    Ok(())
+    Ok(None)
   }
   fn command(
     &mut self,
@@ -317,52 +317,84 @@ impl Interpreter {
     param3: &str,
   ) -> Result<(), Box<dyn Error>> {
     match opcode {
-      //ADD TO TWO VALUES
+      //OPERATIONS SUB/SUM/MUL/DIV
       1 => {
-        let value = self.get_real_value(param1)?;
-        let value2 = self.get_real_value(param2)?;
+        let kind =
+          self.get_real_value(param1)?.force_u32(self.pos)?;
+        let value = self.get_real_value(param2)?;
+        let value2 = self.get_real_value(param3)?;
         if value.r#type != value2.r#type {
           return Err(IError::message(format!(
             "Adding with incompatible types {}",
             self.pos
           )));
         }
-
-        match value.r#type {
-          Type::Usigned => {
-            self.stack.push(u32_add(*value, *value2).into())
-          }
-          Type::Signed => {
-            self.stack.push(i32_add(*value, *value2).into())
-          }
-          Type::Floating => {
-            self.stack.push(f32_add(*value, *value2).into())
+        match kind {
+          0 => match value.r#type {
+            Type::Usigned => {
+              self.stack.push(u32_add(*value, *value2).into())
+            }
+            Type::Signed => {
+              self.stack.push(i32_add(*value, *value2).into())
+            }
+            Type::Floating => {
+              self.stack.push(f32_add(*value, *value2).into())
+            }
+          },
+          1 => match value.r#type {
+            Type::Signed => {
+              self.stack.push(i32_sub(*value, *value2).into())
+            }
+            Type::Usigned => {
+              self.stack.push(u32_sub(*value, *value2).into())
+            }
+            Type::Floating => {
+              self.stack.push(f32_sub(*value, *value2).into())
+            }
+          },
+          2 => match value.r#type {
+            Type::Signed => {
+              self.stack.push(i32_mul(*value, *value2).into())
+            }
+            Type::Usigned => {
+              self.stack.push(u32_mul(*value, *value2).into())
+            }
+            Type::Floating => {
+              self.stack.push(f32_mul(*value, *value2).into())
+            }
+          },
+          3 => match value.r#type {
+            Type::Signed => {
+              self.stack.push(i32_div(*value, *value2).into())
+            }
+            Type::Usigned => {
+              self.stack.push(u32_div(*value, *value2).into())
+            }
+            Type::Floating => {
+              self.stack.push(f32_div(*value, *value2).into())
+            }
+          },
+          _ => {
+            return Err(IError::message(
+              "This function is not implemented",
+            ))
           }
         }
       }
 
-      //SUBTRACT TWO VALUES
+      //IF LOWER JUMP
       2 => {
         let value = self.get_real_value(param1)?;
         let value2 = self.get_real_value(param2)?;
-
+        let pos = self.get_real_value(param3)?.force_u32(self.pos)?;
         if value.r#type != value2.r#type {
           return Err(IError::message(format!(
-            "Adding with incompatible types {}",
+            "Comparing with incompatible types {}",
             self.pos
           )));
         }
-
-        match value.r#type {
-          Type::Signed => {
-            self.stack.push(i32_sub(*value, *value2).into())
-          }
-          Type::Usigned => {
-            self.stack.push(u32_sub(*value, *value2).into())
-          }
-          Type::Floating => {
-            self.stack.push(f32_sub(*value, *value2).into())
-          }
+        if *value < *value2 {
+          self.pos = pos as usize;
         }
       }
 
@@ -376,6 +408,12 @@ impl Interpreter {
         let value = self.get_real_value(param1)?;
         let value2 = self.get_real_value(param2)?;
         let pos = self.get_real_value(param3)?.force_u32(self.pos)?;
+
+        if value.r#type != value2.r#type {
+          return Err(IError::message(
+            "Comparing incompatible types",
+          ));
+        }
 
         if value.r#type == Type::Floating {
           let value = f32::from_be_bytes(*value);
@@ -405,15 +443,20 @@ impl Interpreter {
           self.get_real_value(param3)?.force_u32(self.pos)?;
 
         std::io::stdout().flush()?;
-        let buff = self
-          .infra
-          .read_line()
-          .ok_or(IError::message("failed to read stdin"))?;
+        let buff = self.infra.read_line()?;
 
         match kind {
           1 => {
             self.memory[value as usize] =
               buff.trim().parse::<u32>()?.into()
+          }
+          2 => {
+            self.memory[value as usize] =
+              buff.trim().parse::<i32>()?.into()
+          }
+          3 => {
+            self.memory[value as usize] =
+              buff.trim().parse::<f32>()?.into()
           }
           _ => {
             for (i, char) in buff.chars().enumerate() {
@@ -461,12 +504,17 @@ impl Interpreter {
         }
         let TypedByte { value, r#type } = self.stack.top()?;
 
-        let to_print = match r#type {
-          Type::Floating => format!("{}", f32::from_be_bytes(value)),
-          Type::Signed => format!("{}", i32::from_be_bytes(value)),
-          Type::Usigned => format!("{}", u32::from_be_bytes(value)),
-        };
-        self.infra.print(to_print);
+        match r#type {
+          Type::Floating => {
+            self.infra.print(format!("{}", f32::from_be_bytes(value)))
+          }
+          Type::Signed => {
+            self.infra.print(format!("{}", i32::from_be_bytes(value)))
+          }
+          Type::Usigned => {
+            self.infra.print(format!("{}", u32::from_be_bytes(value)))
+          }
+        }
 
         self.stack.pop();
       }
@@ -518,7 +566,7 @@ impl Interpreter {
         }
       }
       _ => {
-        println!("function not implemented");
+        self.infra.println("function not implemented".to_owned());
       }
     }
     Ok(())
@@ -540,7 +588,7 @@ impl Interpreter {
             )));
           }
           if self.debug {
-            self.infra.print(format!("{}: {}", value, pos + 1));
+            self.infra.println(format!("{}: {}", value, pos + 1));
           }
           self.names.insert(value, pos + 2);
         }
@@ -620,7 +668,6 @@ impl Interpreter {
   }
 }
 
-
 #[wasm_bindgen]
 pub struct Communication {
   v: Interpreter,
@@ -646,7 +693,11 @@ impl Communication {
   #[wasm_bindgen(method)]
   pub fn run_line(&mut self) -> Option<String> {
     match self.v.execute_line() {
-      Ok(_) => None,
+      Ok(a) => if a.is_some() {
+        Some("\n".to_owned())
+      } else {
+        None
+      } ,
       Err(err) => {
         Some(format!("\n<span class='finished'>-------------\n{}\n-------------</span>", err))
       }

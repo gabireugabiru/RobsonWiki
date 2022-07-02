@@ -22,13 +22,14 @@ init().then(() => {
 
 
     function highlight() {
+        console.log(code.innerHTML)
         formated.innerHTML = code.innerHTML
         .replace("\n", "<br>")
-        .replace(/(robson)/g, "<span class='keyword'>$1</span>")
-        .replace(/(\w+\b:)/g, "<span class='alias'>$1</span>")
         .replace(/(\w*:\b\w+)/g, "<span class='alias'>$1</span>")
-        .replace(/(f[0-9]|.[0-9]|[0-9]|i[0-9])/g, "<span class='literal'>$1</span>")
-        .replace(/(comeu|fudeu|lambeu|chupou)/g, "<span class='type'>$1</span>")
+        .replace(/(\w+\b:)/g, "<span class='alias'>$1</span>")
+        .replace(/\b(robson)\b/g, "<span class='keyword'>$1</span>")
+        .replace(/\b(comeu|fudeu|lambeu|chupou)\b/g, "<span class='type'>$1</span>")
+        .replace(/([0-9]|\b[f]\w*[0-9]\b|\b[i]\w*[-]\b|\b[.]\w*[0-9]\b)/g, "<span class='literal'>$1</span>")
     }
     function reset() {
         code.innerHTML = ";setting data<br>robson robson robson<br>comeu 100<br>comeu 108<br>comeu 114<br>comeu 111<br>comeu 119<br>comeu 32<br>comeu 111<br>comeu 108<br>comeu 108<br>comeu 101<br>comeu 72<br>;printing<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>"
@@ -105,7 +106,6 @@ init().then(() => {
                     break;
                 }
                 const stdout = interpreter.stdout();
-                console.log(interpreter.opcode());
                 if (interpreter.opcode() == 6 && !has_input_been_handled) {
                     is_running = false;
                     waiting();
