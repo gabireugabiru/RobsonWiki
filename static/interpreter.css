@@ -16,7 +16,6 @@ body {
 }
 
 #code {
-    font-size: 1.7rem;
     position: absolute;
     left: 5px;
     right: 5px;
@@ -33,12 +32,10 @@ body {
     height: calc(70vh - 75px);
     background: #242824;
     position: relative;
-    font-size: 1.7rem;
 }
 
 
 #formated {
-    font-size: 1.7rem;
     position: absolute;
     left: 5px;
     right: 5px;
@@ -136,7 +133,9 @@ a:hover {
 .alias {
     color: #5ddad4;
 }
-
+.alias > span {
+    color: #5ddad4;
+}
 .running {
     color: #078c07;
 }

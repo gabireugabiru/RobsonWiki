@@ -22,18 +22,23 @@ init().then(() => {
 
 
     function highlight() {
-        console.log(code.innerHTML)
         formated.innerHTML = code.innerHTML
         .replace("\n", "<br>")
         .replace(/(\w*:\b\w+)/g, "<span class='alias'>$1</span>")
         .replace(/(\w+\b:)/g, "<span class='alias'>$1</span>")
         .replace(/\b(robson)\b/g, "<span class='keyword'>$1</span>")
-        .replace(/\b(comeu|fudeu|lambeu|chupou)\b/g, "<span class='type'>$1</span>")
+        .replace(/\b(comeu|fudeu|lambeu|chupou|penetrou)\b/g, "<span class='type'>$1</span>")
         .replace(/([0-9]|\b[f]\w*[0-9]\b|\b[i]\w*[-]\b|\b[.]\w*[0-9]\b)/g, "<span class='literal'>$1</span>")
     }
     function reset() {
         code.innerHTML = ";setting data<br>robson robson robson<br>comeu 100<br>comeu 108<br>comeu 114<br>comeu 111<br>comeu 119<br>comeu 32<br>comeu 111<br>comeu 108<br>comeu 108<br>comeu 101<br>comeu 72<br>;printing<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>robson robson robson robson robson robson robson<br>"
         highlight();
+    }
+
+    function scroll_output() {
+        output.scrollTo({
+            top: output.scrollHeight
+        })
     }
 
     function waiting() {
@@ -61,11 +66,6 @@ init().then(() => {
 
     syntax.onclick = () => code.focus();
 
-    input.onkeyup = (ev) => {
-        if (ev.code == "Enter") {
-            enter.click();
-        }
-    }
 
     code.onscroll = (ev) => {
         formated.scrollTo({
@@ -83,7 +83,13 @@ init().then(() => {
         let interpreter = new Communication(code.innerText);
         let is_running = false;
         let has_input_been_handled = false;
+        let last_pos = 0;
 
+        input.onkeyup = (ev) => {
+            if (ev.code == "Enter") {
+                enter.click();
+            }
+        }
 
         enter.onclick = () => {
             if (!is_running) {
@@ -100,22 +106,29 @@ init().then(() => {
             is_running = true;
             while (true) {
                 const result = interpreter.run_line();
+                const pos = interpreter.pos();
                 if (result) {
                     output.innerHTML = output.innerText + result;
+                    scroll_output()
                     finished();
                     break;
                 }
                 const stdout = interpreter.stdout();
-                if (interpreter.opcode() == 6 && !has_input_been_handled) {
+                if (interpreter.opcode() == 6 && !has_input_been_handled && last_pos === pos) {
                     is_running = false;
                     waiting();
                     input.focus();
+                    output.innerHTML = stdout;
+                    scroll_output()
+                    last_pos = pos;
                     break;
                 }
                 if (has_input_been_handled) {
                     has_input_been_handled = false;
                 }
+                last_pos = pos;
                 output.innerHTML = stdout;
+                scroll_output()
             }
         }
         start_running();

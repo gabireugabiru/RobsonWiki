@@ -165,7 +165,7 @@ pub struct Interpreter {
   infra: Infra,
   last_opcode: u8,
   #[cfg(any(target_arch = "wasm32", target_arch = "wasm64"))]
-  used_input: i64
+  used_input: i64,
 }
 
 impl Interpreter {
@@ -174,7 +174,6 @@ impl Interpreter {
     limit: usize,
     infra: Infra,
   ) -> Result<Self, Box<dyn Error>> {
-    
     Ok(Self {
       memory: vec![
         TypedByte {
@@ -191,7 +190,7 @@ impl Interpreter {
       names: HashMap::new(),
       infra,
       last_opcode: 0,
-      #[cfg(target_arch = "wasm32")]
+      #[cfg(any(target_arch = "wasm32", target_arch = "wasm64"))]
       used_input: -1,
     })
   }
@@ -258,7 +257,6 @@ impl Interpreter {
       }
       opcode += 1;
     }
-
     #[cfg(any(target_arch = "wasm32", target_arch = "wasm64"))]
     if opcode == 6 {
       if self.used_input != self.pos as i64 {
@@ -266,6 +264,8 @@ impl Interpreter {
         self.used_input = self.pos as i64;
         return Ok(None);
       }
+    } else {
+      self.used_input = -1;
     }
 
     let param_count = self.opcode_params[opcode as usize];
@@ -317,7 +317,7 @@ impl Interpreter {
     param3: &str,
   ) -> Result<(), Box<dyn Error>> {
     match opcode {
-      //OPERATIONS SUB/SUM/MUL/DIV
+      //OPERATIONS SUB/SUM/
       1 => {
         let kind =
           self.get_real_value(param1)?.force_u32(self.pos)?;
@@ -394,7 +394,7 @@ impl Interpreter {
           )));
         }
         if *value < *value2 {
-          self.pos = pos as usize;
+          self.pos = (pos - 1) as usize;
         }
       }
 
@@ -422,7 +422,9 @@ impl Interpreter {
             self.pos = (pos - 1) as usize;
           }
         } else {
-          self.pos = (pos - 1) as usize;
+          if *value == *value2 {
+            self.pos = (pos - 1) as usize;
+          }
         }
       }
       //VERIFY THE STACK IF IS EMPTY JUMP
@@ -634,7 +636,7 @@ impl Interpreter {
         Ok(a)
       }
       "fudeu" => {
-        let value = splited[1].parse::<usize>()?;
+        let value = splited[1].trim().parse::<usize>()?;
         Ok(self.memory[value])
       }
       "lambeu" => {
@@ -651,8 +653,13 @@ impl Interpreter {
           .names
           .get(&value)
           .ok_or(IError::message(format!("cant find {}", value)))?;
-
         Ok((*a as u32).into())
+      }
+      "penetrou" => {
+        let value = splited[1].trim().parse::<usize>()?;
+        let address =
+          self.memory[value].force_u32(self.pos)? as usize;
+        Ok(self.memory[address])
       }
       token => {
         return Err(IError::message(format!(
@@ -667,7 +674,6 @@ impl Interpreter {
     self.lines.len() <= pos
   }
 }
-
 #[wasm_bindgen]
 pub struct Communication {
   v: Interpreter,
@@ -714,5 +720,8 @@ impl Communication {
   #[wasm_bindgen(method)]
   pub fn opcode(&self) -> u8 {
     self.v.last_opcode
+  }
+  pub fn pos(&self) -> usize {
+    self.v.pos
   }
 }

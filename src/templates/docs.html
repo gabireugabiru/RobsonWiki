@@ -265,7 +265,66 @@
                     In this command we're adding the two last parameters and pushing to stack the result
                 </p>
                 <p>
-                    the last command just print the number to the screen
+                    The last command just print the number to the screen
+                </p>
+
+                <p>
+                    Although robson doesn't have proper pointers, you can access data through data
+                    with the penetrou keyword, example:
+                </p>
+
+                    
+                <div class="code">
+                    <span class="keyword">
+                        robson robson robson
+                    </span>
+                    <span>comeu <span class="literal">12</span></span>
+                    <span>comeu <span class="literal">69</span></span>
+                    <span class="keyword">robson robson robson robson robson robson robson robson robson robson</span>
+                    <span>comeu <span class="literal">1</span></span>
+                    <span class="keyword">robson robson robson robson robson robson robson robson robson robson</span>
+                    <span>comeu <span class="literal">0</span></span>
+                    <span class="keyword">
+                        robson robson robson
+                    </span>
+                    <span>comeu <span class="literal">1</span></span>
+                    <span class="keyword">robson robson robson robson robson robson robson robson robson robson</span>
+                    <span>comeu <span class="literal">4</span></span>
+                    <span class="keyword">
+                        robson robson robson
+                    </span>
+                    <span>penetrou <span class="literal">4</span></span>
+                    <span class="keyword">robson robson robson robson robson robson robson robson</span>
+                </div>
+                <p>
+                    In this example the memory will look like:
+                </p>
+                <div class="memory">
+                    <div>
+                        <span class="address">0</span>
+                        <span class="value">12</span>
+                    </div>
+                    <div>
+                        <span class="address">1</span>
+                        <span class="value">69</span>
+                    </div>
+                    <div>
+                        <span class="address">2</span>
+                        <span class="value">0</span>
+                    </div>
+                    <div>
+                        <span class="address">3</span>
+                        <span class="value">0</span>
+                    </div>
+                    <div>
+                        <span class="address">4</span>
+                        <span class="value">1</span>
+                    </div>
+                </div>
+                <p>
+                    So when we write penetrou 4
+                   whe mean the value in the address that the value in address 4 points,
+                   the address being 1 and the value 69 
                 </p>
                 <p>
                     Worth mention the "chupou" keyword, it is used when you wanna

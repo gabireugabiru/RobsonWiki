@@ -159,6 +159,13 @@ export class Communication {
         const ret = wasm.communication_opcode(this.ptr);
         return ret;
     }
+    /**
+    * @returns {number}
+    */
+    pos() {
+        const ret = wasm.communication_pos(this.ptr);
+        return ret >>> 0;
+    }
 }
 
 async function load(module, imports) {

@@ -27,7 +27,6 @@ async fn main() -> std::io::Result<()> {
         Ok(a) => a,
         Err(_) => "8080".to_owned()
     };
-    
     HttpServer::new(|| {
         App::new()
         .service(actix_files::Files::new("/static", match std::env::var("PORT") {
