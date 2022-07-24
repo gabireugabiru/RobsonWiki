@@ -15,10 +15,10 @@ li {
 a {
     margin-top: .8rem;
     text-decoration: none;
-    color: #00ff33;
+    color: var(--l-primary-color);
     transition: color 200ms;
     font-size: 1.6rem;
 }
 a:hover {
-    color: #05bb2a; 
+    color: var(--d-primary-color); 
 }

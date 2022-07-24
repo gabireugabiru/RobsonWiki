@@ -4,6 +4,7 @@
 body {
     margin: 0;
     background: #eee;
+    overflow-x: hidden;
 }
 #root {
     width: 100%;
@@ -33,12 +34,12 @@ navbar {
 #list > li {
     font-weight: bolder;
     font-size: 2rem;
-    color: #00ff33;
+    color: var(--l-primary-color);
     transition: color 200ms;
     cursor: pointer;
 }
 #list > li:hover {
-    color: #05bb2a; 
+    color: var(--d-primary-color); 
 }
 #list > li + li {
     margin-top: 2rem; 
@@ -105,15 +106,38 @@ main > section > button {
     background: none;
     border: none;
     cursor: pointer;
-    color: #00ff33;
+    color: var(--l-primary-color);
     font-weight: bolder;
     transition: color 200ms;
 }
 main > section > button:hover {
-    color: #05bb2a;
+    color: var(--d-primary-color);
 }
 .hidden {
-    display: none;
+    position: absolute;
+    right: 100vw;
+}
+.hidden.animate {
+    animation: fade 200ms;
+}
+section.appear {
+    animation: appear 500ms;
+}
+@keyframes fade {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100vw);
+    }
+}
+@keyframes appear {
+    from {
+        transform: translateX(100vw);
+    }
+    to {
+        transform: translateX(0);
+    }
 }
 
 div.code {
@@ -194,19 +218,21 @@ ol > li + li {
         border: none;
         background: none;
         margin: 0;
-        color:#00ff33;
+        color: var(--l-primary-color);
         transition: color 200ms;
     }
     button:hover {
-        color:#05bb2a;
+        color: var(--d-primary-color);
     }
     #inside {
-        display: block;
+        opacity: 100%;
+        position: static; 
         margin: 3rem 1rem;
         font-size: 4rem;
     }
     #outside {
-        display: block;
+        opacity: 100%;
+        position: static;
         margin: 3rem 1rem;
         font-size: 4rem;
     }
@@ -214,5 +240,4 @@ ol > li + li {
         left: 25px;
         bottom: 25px;
     }
-    
 }

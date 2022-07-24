@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/index.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/vars.css">
+    <link rel="stylesheet" href="/static/css/logo.css">
+    <script src="/static/js/logo.js" defer ></script>
+    <script src="/static/js/index.js" defer></script>
     <title>Robson</title>
 </head>
 <body>
     <div id="root">
         <header>
-            <img class="logo" src="/static/Robson.png" />
+            <div class="logo_svg animate" > </div>
             <ul class="navbar" >
                 <li><a href="/docs">Docs</a></li>
                 <li><a href="https://github.com/gabireugabiru/robson" target="_blank">Repository</a></li>
@@ -19,19 +23,18 @@
             </ul>
         </header>
         <main>
+
             <div class="presentation">
                 <h1>
-                    Robson
-                    <span>
-                        v0.0.9
-                    </span>
+                    Robson <span>v0.0.9</span> 
                 </h1>
                 <p>
-                    Robson is the vision of the future of the verbose driven instant legacy code 
+                    Robson is a vision of the future of the verbose driven instant legacy code 
                     style. It has heavy inspirations in java, by repeating the same thing over 
                     and over, but has also the procedural nature of assembly and HolyC              
                 </p>
             </div>
+            <div class="curves"></div>
             <div class="why">
                 <h2>
                     Why Robson?
@@ -70,6 +73,7 @@
                     </section>
                 </div>
             </div>
+            <div class="curves reverse"></div>
         </main>
         <footer>
             <div>

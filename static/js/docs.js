@@ -6,7 +6,7 @@ ids.forEach((id, index, array) => {
             hide_sections();
             const section = element_id(id); 
             if (section) {
-                section.setAttribute("class", `_${id}`);
+                section.setAttribute("class", `_${id} appear`);
             }
         }
     }
@@ -17,7 +17,7 @@ ids.forEach((id, index, array) => {
                 hide_sections();
                 const section = document.querySelector(`section._${array[index + 1]}`);
                 if (section) {
-                    section.setAttribute("class", `_${array[index+1]}`);
+                    section.setAttribute("class", `_${array[index+1]} appear`);
                 }
             }
         }
@@ -27,15 +27,11 @@ ids.forEach((id, index, array) => {
 const element_id = (id) => document.querySelector(`section._${id}`);
 
 function hide_sections() {
-    window.scrollTo({
-        left: 0,
-        top: 0,
-        behavior: "smooth"
-    })
+    window.scrollTo({left: 0, top:0});
     for (const id of ids) {
         let element = element_id(id);
         if (element) {
-            element.setAttribute("class", `_${id} hidden`);
+            element.setAttribute("class", `_${id} hidden animate`);
         }
     }
 }
@@ -43,10 +39,19 @@ function hide_sections() {
 const logo = document.getElementById("logo");
 logo.onclick = () => window.location.href = "/";
 const navbar = document.querySelector("navbar");
-
+let had_open = false;
+if (window.innerWidth < 675) {
+    logo.setAttribute("class", "logo_svg");
+}
 document.getElementById("outside").onclick = () => {
     navbar.setAttribute("class", "open");
+    if (!had_open) {
+        logo.setAttribute("class", "logo_svg");
+        logo.setAttribute("class", "logo_svg animate");
+        had_open = true;
+    }
 }
 document.getElementById("inside").onclick = () => {
     navbar.setAttribute("class", "");
+    logo.setAttribute("class", "logo_svg");
 }

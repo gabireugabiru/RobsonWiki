@@ -13,6 +13,7 @@ body {
 
 #logo {
     cursor: pointer;
+    height: 100%;
 }
 
 #code {
@@ -69,11 +70,11 @@ header {
 a {
     font-size: 2rem;
     text-decoration: none;
-    color: #00ff33;
+    color: var(--l-primary-color);
     transition: color 200ms;
 }
 a:hover {
-    color: #05bb2a; 
+    color: var(--d-primary-color); 
 }
 
 .row {
@@ -105,12 +106,12 @@ a:hover {
     border: none;
     color: white;
     font-size: 1.5rem;
-    background: rgb(206, 120, 0);
+    background: var(--l-primary-color);
     cursor: pointer;
     transition: background 200ms;
 }
 .row > div > button:hover {
-    background:rgb(159, 95, 4);
+    background:var(--d-primary-color);
 }
 .row > div > input {
     width: 100%;
@@ -121,7 +122,7 @@ a:hover {
     font-size: 2rem;
 }
 .row > div >input:focus {
-    border-bottom: 3px solid #00ff33;
+    border-bottom: 3px solid var(--l-primary-color);
 }
 .keyword {
     color: #e127e1;

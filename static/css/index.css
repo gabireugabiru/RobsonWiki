@@ -5,6 +5,7 @@
 body {
     margin: 0;
     background: #eee;
+    overflow-x: hidden;
 }
 #root {
     width: 100%;
@@ -22,6 +23,7 @@ ul.navbar {
     list-style-type: none;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 ul.navbar > li {
     font-size: 2rem;
@@ -29,17 +31,20 @@ ul.navbar > li {
 ul.navbar > li + li  {
     margin-left: 4rem; 
 }
-img.logo {
+div.logo_svg {
     width: 100px;
     height: auto;
 }
 a {
+    font-weight: bold;
+    font-size: 2.2rem;
     text-decoration: none;
-    color: #00ff33;
+    color: var(--l-primary-color);
     transition: 200ms;
 }
 a:hover {
-    color: #05bb2a; 
+    color: var(--d-primary-color); 
+    text-shadow: 0 0 7px rgba(130, 80, 230, 0.5);
 }
 a.blue {
     color: white;
@@ -57,17 +62,23 @@ div.presentation > p {
 div.presentation > h1 {
     font-size: 6rem;
     text-align: center;
+    transition: 200ms;
+    font-family: Helvetica, sans-serif;
 }
 div.presentation > h1 > span {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: lighter;
+    color: var(--d-primary-color);
 }
 div.why {
-    margin-top: 2rem;
-    background: #6f822b;
-    padding: 8rem 2rem;
+    position: relative;
+    background: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    padding: 0rem 2rem 8rem 2rem;
 }
 div.why > h2 {
+    padding-top: 5rem;
     font-size: 5rem;
 }
 div.why > div{
@@ -111,6 +122,21 @@ img.robson {
     margin: 1rem 2rem 20px 2rem;
     border-radius: 1rem;
 }
+div.curves {
+    display: block;
+    width: 100vw;
+    margin-top: 15rem;
+    margin-left: -13px;
+    margin-bottom: -4px;
+}
+div.curves > svg > path{
+    fill: var(--secondary-color);
+}
+div.curves.reverse {
+    transform: rotate(180deg);
+    margin-top: -6px;
+    margin-left: 0;
+}
 @media only screen and (max-width: 1100px) {
 
     html {
@@ -133,7 +159,7 @@ img.robson {
         margin: 0;
     }
 }
-@media only screen and (max-width: 675px) {
+@media only screen and (max-width: 771px) {
     
     html {
         font-size: 60%;
