@@ -1,0 +1,20 @@
+:root {
+    --l-primary-color: #9f43e1;   
+    --d-primary-color: #b865f3;
+    --secondary-color: #541179;
+    --text-shadow: rgba(182, 107, 247, 0.5);
+    --primary-background: #0d0218;
+    --secondary-text: #ccc;
+    --highlight: white;
+    --main-border-color: rgba(192, 184, 184, 0.2);
+    --thicc-border-color: rgba(192, 184, 184, 0.8);
+    --default-color: white;
+    --code-text: #111;
+    --code-background: #f7eeee;
+
+
+    --code-literal: #dba035;
+    --code-keyword: #e127e1;
+    --code-type: #111;
+    --code-alias: #5ddad4;
+}

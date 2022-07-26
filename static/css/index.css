@@ -4,8 +4,9 @@
 }
 body {
     margin: 0;
-    background: #eee;
+    background: var(--primary-background);
     overflow-x: hidden;
+    color: var(--default-color);
 }
 #root {
     width: 100%;
@@ -13,11 +14,59 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+#theme {
+    background: none;
+    position: relative;
+    border: none;
+    width: 5rem;
+    height: 2.5rem;
+    background: var(--secondary-color);
+    border-radius: 2rem;
+}
+#theme > div {
+    width: 2.3rem;
+    height: 2.3rem;
+    border-radius: 50%;
+    position: absolute;
+    top : calc((2.5rem - 2.3rem) / 2);
+}
+#theme.white > div {
+    background: #eee;
+    left: 2px;
+    animation: left 500ms;
+}
+#theme.dark > div {
+    background: #0d0218;
+    left: calc(100% - 2.3rem - 2px);
+    animation: right 500ms;
+}
+@keyframes left {
+    from {
+        background: #0d0218;
+        left: calc(100% - 2.3rem - 2px);
+    }
+    to {
+        background: #eee;
+        left: 2px;
+    }
+}
+@keyframes right {
+    from {
+        background: #eee;
+        left: 2px;
+    }
+    to {
+        background: #0d0218;
+        left: calc(100% - 2.3rem - 2px);
+    }
+}
+
 header {
     display: flex;
     justify-content: space-between;
     padding: 1rem 4rem;
-    border-bottom: 1px solid rgba(0,0,0,.2);
+    border-bottom: 1px solid var(--main-border-color);
 }
 ul.navbar {
     list-style-type: none;
@@ -40,14 +89,16 @@ a {
     font-size: 2.2rem;
     text-decoration: none;
     color: var(--l-primary-color);
-    transition: 200ms;
 }
 a:hover {
     color: var(--d-primary-color); 
-    text-shadow: 0 0 7px rgba(130, 80, 230, 0.5);
+    text-shadow: 0 0 7px var(--text-shadow);
 }
-a.blue {
-    color: white;
+
+
+
+a.highlight {
+    color: var(--highlight);
 }
 div.presentation {
     display: flex;
@@ -62,7 +113,6 @@ div.presentation > p {
 div.presentation > h1 {
     font-size: 6rem;
     text-align: center;
-    transition: 200ms;
     font-family: Helvetica, sans-serif;
 }
 div.presentation > h1 > span {
@@ -72,6 +122,7 @@ div.presentation > h1 > span {
 }
 div.why {
     position: relative;
+    width: 100vw;
     background: var(--secondary-color);
     display: flex;
     flex-direction: column;
@@ -80,6 +131,7 @@ div.why {
 div.why > h2 {
     padding-top: 5rem;
     font-size: 5rem;
+    color: var(--highlight);
 }
 div.why > div{
     margin-top: 4rem;
@@ -91,7 +143,7 @@ div.why > div > section {
     width: 30%;
     font-size: 1.7rem;
     margin: 0 3%;
-    color: #ccc;
+    color: var(--secondary-text);
 }
 div.why > div > section > h3 {
     font-size: 4rem;
@@ -106,9 +158,16 @@ footer > div {
     display: flex;
     align-items: center;
 }
-img.thumbs {
-    width: 64px;
-    margin: 1rem 2rem 20px 2rem;
+footer > div > div.thumbs {
+    margin-top: 2rem;
+}
+footer > div > div.thumbs > svg {
+    width: 5rem;
+    height: 5rem;
+}
+footer > div > div.thumbs > svg path {
+    stroke: var(--default-color);
+    fill: var(--default-color);
 }
 div.robson {
     margin-top: 2rem;
@@ -126,15 +185,16 @@ div.curves {
     display: block;
     width: 100vw;
     margin-top: 15rem;
-    margin-left: -13px;
-    margin-bottom: -4px;
+    /* margin-left: -13px; */
+    margin-bottom: -10px;
 }
-div.curves > svg > path{
+div.curves > svg > g > path{
     fill: var(--secondary-color);
+    width: 100vw;
 }
 div.curves.reverse {
     transform: rotate(180deg);
-    margin-top: -6px;
+    margin-top: -10px;
     margin-left: 0;
 }
 @media only screen and (max-width: 1100px) {

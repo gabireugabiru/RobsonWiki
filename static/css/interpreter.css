@@ -3,7 +3,9 @@
 }
 
 body {
+    background: var(--primary-background);
     margin: 0;
+    color: var(--default-color);
 }
 
 #root {
@@ -22,16 +24,17 @@ body {
     right: 5px;
     top: 5px;
     bottom: 5px;
-    caret-color: #fff;
+    caret-color: var(--code-text);
     color: transparent;
     outline: none;
     overflow-y: auto;
+    font-weight: bold; 
 }
 
 #syntax {
     width: 100%;
     height: calc(70vh - 75px);
-    background: #242824;
+    background: var(--code-background);
     position: relative;
 }
 
@@ -42,7 +45,8 @@ body {
     right: 5px;
     top: 5px;
     bottom: 5px;
-    color: white;
+    font-weight: bold; 
+    color: var(--code-text);
     background: transparent;
     word-wrap: break-word;
     overflow-y: hidden;
@@ -51,9 +55,9 @@ body {
 #output {
     width: 100%;
     height: calc(30vh - 50px);
-    background: #242824;
+    background: var(--code-background);
     white-space: pre-line;
-    color: white;
+    color: var(--code-text);
     font-size: 1.7rem;
     padding: 10px;
     overflow: auto;
@@ -64,7 +68,7 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 1rem;
-    border-bottom: 1px solid rgba(0,0,0,.2);
+    border-bottom: 1px solid var(--main-border-color);
     align-items: center;
 }
 a {
@@ -104,7 +108,7 @@ a:hover {
     height: 100%;
     width: 100px;
     border: none;
-    color: white;
+    color: var(--default-color);
     font-size: 1.5rem;
     background: var(--l-primary-color);
     cursor: pointer;
@@ -117,31 +121,32 @@ a:hover {
     width: 100%;
     height:100%;
     border: none;
-    border-left: 1px solid rgba(0,0,0,.2);
+    background: var(--main-background);
+    border-left: 1px solid var(--main-border-color);
+    color: var(--default-color);
     outline: none;
     font-size: 2rem;
 }
-.row > div >input:focus {
+.row > div > input:focus {
     border-bottom: 3px solid var(--l-primary-color);
 }
 .keyword {
-    color: #e127e1;
+    color: var(--code-keyword);
 }
 .literal {
-    color: #dba035;
+    color: var(--code-literal);
 }
-
 .alias {
-    color: #5ddad4;
+    color: var(--code-alias);
 }
 .alias > span {
-    color: #5ddad4;
+    color: var(--code-alias);
 }
 .running {
     color: #078c07;
 }
 .type {
-    color: #e5c07b;
+    color: var(--code-type);
 }
 .finished {
     color: #f42222;

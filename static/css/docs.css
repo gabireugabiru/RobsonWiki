@@ -3,8 +3,9 @@
 }
 body {
     margin: 0;
-    background: #eee;
+    background: var(--primary-background);
     overflow-x: hidden;
+    color: var(--default-color);
 }
 #root {
     width: 100%;
@@ -18,9 +19,9 @@ navbar {
     left: 0;
     top: 0;
     bottom: 0;
-    background: #eee;
+    background: var(--primary-background);
     z-index: 2;
-    border-right: 1px solid rgba(0, 0, 0, .2);
+    border-right: 1px solid var(--main-border-color);
 }
 
 #list {
@@ -67,7 +68,7 @@ main > section > div.stack > span{
     padding: 1rem;
     font-size: 1.3rem;
     border-radius: 5px;
-    border: 4px solid rgba(0, 0, 0, .8);
+    border: 4px solid var(--thicc-border-color);
 }
 main > section > div.stack > span + span {
     margin-left: 1px;
@@ -80,7 +81,7 @@ main > section > div.memory {
 main > section > div.memory > div {
     font-size: 1.3rem;
     border-radius: 5px;
-    border: 4px solid rgba(0, 0, 0, .8);
+    border: 4px solid var(--thicc-border-color);
     position: relative;
     width: 5rem;
     height: 5rem;
@@ -118,10 +119,10 @@ main > section > button:hover {
     right: 100vw;
 }
 .hidden.animate {
-    animation: fade 200ms;
+    animation: fade 150ms;
 }
 section.appear {
-    animation: appear 500ms;
+    animation: appear 300ms;
 }
 @keyframes fade {
     from {
@@ -132,18 +133,22 @@ section.appear {
     }
 }
 @keyframes appear {
-    from {
+    0% {
         transform: translateX(100vw);
     }
-    to {
+    50% {
+        transform: translateX(100vw);
+    }
+    100% {
         transform: translateX(0);
     }
 }
 
 div.code {
+    font-weight: bold;
     padding: 1rem;
-    background: #242824;
-    color: white;
+    background: var(--code-background);
+    color: var(--code-text);
     border-radius: .6rem;
     font-size: 1.7rem;
     display: flex;

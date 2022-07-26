@@ -1,10 +1,10 @@
 function load_svg(path, element) {
     if (element && path) {
-        fetch(path).then(response => {
-            response.text().then(text => {
-                element.innerHTML = text;
+            fetch(path).then(response => {
+                response.text().then(text => {
+                    element.innerHTML = text;
+                });
             });
-        });
     }
     
 }

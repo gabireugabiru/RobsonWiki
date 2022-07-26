@@ -12,7 +12,7 @@ const input = document.getElementById("stdin");
 const enter = document.getElementById("enter");
 
 if (navigator.userAgent.includes("Mobile") || navigator.userAgent.includes("Android")) {
-    code.setAttribute("style", "color: white;");
+    code.setAttribute("style", "color: var(--code-text);");
     formated.setAttribute("style", "display: none;")
 }
 
@@ -51,7 +51,7 @@ init().then(() => {
     }
     function finished() {
         status.setAttribute("class", "finished");
-        status.innerHTML = "Finished"
+        status.innerHTML = "Finished";
     }
     
     if (local_code) {
@@ -78,7 +78,8 @@ init().then(() => {
         localStorage.setItem("code", ev.target.innerHTML);    
     }
 
-    run.onclick = () => {
+    run.onclick = ev => {
+        ev.preventDefault();
         output.innerHTML = "";
         let interpreter = new Communication(code.innerText);
         let is_running = false;
@@ -91,7 +92,8 @@ init().then(() => {
             }
         }
 
-        enter.onclick = () => {
+        enter.onclick = ev => {
+            ev.preventDefault();
             if (!is_running) {
                 let value = input.value;
                 input.value = "";
@@ -109,7 +111,7 @@ init().then(() => {
                 const pos = interpreter.pos();
                 if (result) {
                     output.innerHTML = output.innerText + result;
-                    scroll_output()
+                    scroll_output();
                     finished();
                     break;
                 }
@@ -119,7 +121,7 @@ init().then(() => {
                     waiting();
                     input.focus();
                     output.innerHTML = stdout;
-                    scroll_output()
+                    scroll_output();
                     last_pos = pos;
                     break;
                 }
@@ -128,7 +130,7 @@ init().then(() => {
                 }
                 last_pos = pos;
                 output.innerHTML = stdout;
-                scroll_output()
+                scroll_output();
             }
         }
         start_running();
