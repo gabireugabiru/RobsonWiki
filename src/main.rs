@@ -125,6 +125,7 @@ async fn main() -> std::io::Result<()> {
         
         #[cfg(not(debug_assertions))]
         return a;
+        #[cfg(debug_assertions)]
         a.wrap(NoCache)
     })
     .bind(format!("0.0.0.0:{}", port))?
