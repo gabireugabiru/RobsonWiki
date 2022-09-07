@@ -1,5 +1,15 @@
 const versions = [
     {
+        version: "0.1.3",
+        changes: [
+            "Now --version shows robson's logo"
+        ],
+        features: [
+            "Added --generate for getting string raw values",
+            "Added robsons keyword for including other robson files in the robson binary",
+        ]
+    },
+    {
         version: "0.1.2",
         changes: ["Fixed path lowercasing", "Increased cohesion in terminal commands", "Now compiled robsons are placed in ./out", "Terminal operations now are queued, so they will only run when flushed", "Removed some abstractions in terminal commands"],
         features: []

@@ -206,6 +206,9 @@
                     <li>Set to memory</li>
                     <li>Pop stack</li>
                     <li>Get string buffer</li>
+                    <li>Time Commands</li>
+                    <li>Flush</li>
+                    <li>Terminal Commands</li>
                 </ol>
                 <p>
                     Every opcode has a different number of params varying between 0 and 3
@@ -331,9 +334,7 @@
                 </p>
                 <p>
                     Worth mention the "chupou" keyword, it is used when you wanna
-                    pass a value from the stack to a param,
-                    normally used as "chupou 0", but you colud use other numbers 
-                    to reach into the stack, but its highly insecure, <span class="literal">!!It doesnt pop from the stack!!</span>
+                    use the stack top as a param, it is only valid as "chupou 0"
                 </p>
                 <button>Next</button>
             </section>
@@ -368,7 +369,7 @@
                     <span class="keyword">robson robson robson</span>
                     <span>comeu <span class="literal">69</span></span>
                     <span class="keyword">robson robson robson robson robson robson robson robson robson </span>
-                    <span>comeu <span class="literal">6</span></span>
+                    <span>comeu <span class="literal">4</span></span>
                     <span class="keyword">robson robson robson robson robson robson robson</span>
                     <span class="keyword">robson robson robson robson robson robson robson robson</span>
                 </div>
@@ -376,7 +377,7 @@
                     On the surface this seems better code, as it has less lines, 
                     but this code is not maintainable, couse if you for some reason
                     add more lines of code before that, the code is gonna be on undefined behavior
-                    since we dont know what could be in line 6
+                    since we dont know what could be at command 6
                 </p>
                 <p>
                     This is the end of the guide on Robson, if you wanna an overview of the 

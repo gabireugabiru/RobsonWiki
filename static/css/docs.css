@@ -35,7 +35,7 @@ navbar {
 }
 #list > li {
     font-weight: bolder;
-    font-size: 2rem;
+    font-size: 1.7rem;
     color: var(--l-primary-color);
     transition: color 200ms;
     cursor: pointer;
