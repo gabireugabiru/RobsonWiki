@@ -72,23 +72,27 @@ where
 async fn index() -> impl Responder {
     HttpResponse::Ok().body(include_str!("templates/index.html"))
 }
-#[get("/guide")]
+#[get("/guide.robson")]
 async fn guide() -> impl Responder {
    HttpResponse::Ok().body(include_str!("templates/guide.html")) 
 }
-#[get("/docs")]
+#[get("/docs.robson")]
 async fn docs() -> impl Responder {
     HttpResponse::Ok().body(include_str!("templates/docs.html"))
 }
-#[get("/versions")]
+#[get("/versions.robson")]
 async fn versions() -> impl Responder {
     HttpResponse::Ok().body(include_str!("templates/versions.html"))
 }
-#[get("/interpreter")]
+#[get("/interpreter.robson")]
 async fn interpreter() -> impl Responder {
     HttpResponse::Ok().body(include_str!("templates/interpreter.html"))
 }
 
+#[get("/changelog.robson")]
+async fn changelog() -> impl Responder {
+    HttpResponse::Ok().body(include_str!("templates/changelog.html"))
+}
 #[get("/dynamic/css/vars.css")]
 async fn vars(req: HttpRequest) -> impl Responder {
     
@@ -120,7 +124,8 @@ async fn main() -> std::io::Result<()> {
             .service(docs)
             .service(versions)
             .service(interpreter)
-            .service(vars);
+            .service(vars)
+            .service(changelog);
 
         
         #[cfg(not(debug_assertions))]

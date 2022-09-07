@@ -577,6 +577,98 @@
                             <span>comeu <span class="literal">0</span></span>
                         </div>
                     </li>
+                    <li>
+                        <h4>
+                            Time
+                        </h4>
+                        <p>
+                            Wraps some time functions supported by robson
+                        </p>
+                        <p>count, Will set the global time to start counting from the moment this command is run, if you run again it resets</p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson robson robson robson robson robson robson robson robson robson robson</span>
+                            <span>comeu <span class="literal">0</span></span>
+                        </div>
+                        <p> interval, Set the global interval based on the stack top, for the time it will use the two values on stack top and put its binary in this order, [first stack top, seccond stack top]</p>
+                        <div class="code">
+                            <span>; Setting an inverval of 100ms</span>
+                            <span class="keyword">robson robson robson</span>
+                            <span>comeu <span class="literal">100</span></span>
+                            <span>comeu <span class="literal">0</span></span>
+                            
+                            <span class="keyword">robson robson robson robson robson robson robson robson robson robson robson robson robson</span>
+                            <span>comeu <span class="literal">1</span></span>
+                        </div>
+                        <p>cmp_interval, Compare the interval with the global time, pushes to stack 0 if lower, 1 if equal and 2 if greater</p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson robson robson robson robson robson robson robson robson robson robson</span>
+                            <span>comeu <span class="literal">2</span></span>
+                        </div>
+                    </li>
+                    <li>
+                        <h4>
+                            Flush
+                        </h4>
+                        <p>Will flush to stdout</p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson robson robson robson robson robson robson robson robson robson robson robson</span>
+                        </div>
+                    </li>
+                    <li>
+                        <h4>
+                            Terminal commands
+                        </h4>
+                        <p>
+                           The raw commands that robson supports 
+                        </p>
+                        <p>
+                            enter, Enable or disable the raw mode based on stack top, 0 to disable, 1 to enable
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson</span>
+                            <span>comeu <span class="literal">1</span></span>
+                            <span class="keyword">robson robson robson robson robson robson robson robson robson robson robson robson robson robson robson</span>
+                            <span>comeu <span class="literal">0</span></span>
+                        </div>
+                        <p>
+                            clear, Will clear the terminal screen in one of two ways, based on stack top, if is 0, will purge the screen otherwise it will clear all
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson</span>
+                            <span>comeu <span class="literal">1</span></span>
+                            <span class="keyword">robson robson robson robson robson robson robson robson robson robson robson robson robson robson robson</span>
+                            <span>comeu <span class="literal">1</span></span>
+                        </div>
+                        <p>
+                            poll, Will get the input of the user for the time specified on the stack top
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson</span>
+                            <span>comeu <span class="literal">100</span></span>
+                            <span>comeu <span class="literal">0</span></span>
+                            <span class="keyword">robson robson robson robson robson robson robson robson robson robson robson robson robson robson robson</span>
+                            <span>comeu <span class="literal">2</span></span>
+                        </div>
+                        <p>
+                            cursor, Show or hide the cursor based on stack top
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson</span>
+                            <span>comeu <span class="literal">0</span></span>
+                            <span class="keyword">robson robson robson robson robson robson robson robson robson robson robson robson robson robson robson</span>
+                            <span>comeu <span class="literal">3</span></span>
+                        </div>
+                        <p>
+                            mv_cursor, Will move the cursor to the coordinates on the two values of stack top, x, y respectively
+                        </p>
+                        <div class="code">
+                            <span class="keyword">robson robson robson</span>
+                            <span>comeu <span class="literal">0</span></span>
+                            <span>comeu <span class="literal">1</span></span>
+                            <span class="keyword">robson robson robson robson robson robson robson robson robson robson robson robson robson robson robson</span>
+                            <span>comeu <span class="literal">4</span></span>
+                        </div>
+                    </li>
                 </ol>
             </section>
         </main>
