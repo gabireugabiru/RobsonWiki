@@ -1,4 +1,4 @@
-const ids = ["Basic", "Opcodes", "Params","Aliases", "Overview"];
+const ids = ["Basic", "Opcodes", "Params","Aliases", "Overview", "Cli"];
 ids.forEach((id, index, array) => {
     const element = document.getElementById(id);
     if (element) {

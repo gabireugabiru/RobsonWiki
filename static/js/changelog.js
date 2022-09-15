@@ -1,5 +1,16 @@
 const versions = [
     {
+        version: "0.1.4",
+        features: [
+            "Added --chars for getting ascci values",
+            "Added opcode 16 for random numbers",
+            "Added type conversion"
+        ],
+        changes: [
+            "Now error of invalid flags to show all valid flags"
+        ]
+    },
+    {
         version: "0.1.3",
         changes: [
             "Now --version shows robson's logo"

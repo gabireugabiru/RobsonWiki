@@ -19,6 +19,9 @@
                 |||
             </button>
             <ul id="list">
+                <li id="Cli">
+                    Cli
+                </li>
                 <li id="Basic">
                     Basic Concepts
                 </li>
@@ -34,9 +37,6 @@
                 <li id="Overview">
                     Overview
                 </li>
-                <li>
-
-                </li>
             </ul>
             <div id="logo" class="logo_svg animate"></div>
         </navbar>
@@ -44,7 +44,79 @@
             <button id="outside" class="hidden">
                 |||
             </button>
-            <section class="_Basic">
+            <section class="_Cli">
+                <h2>
+                    Robson's cli
+                </h2>
+                <p>
+                    The robson cli gives you a lot of commands to helps you create and run your robson projects  
+                </p>
+                <h2>
+                    Running .rbsn
+                </h2>
+                <p>
+                    Running a .rbsn file is simple and straight forward just do a:
+                </p>
+                <div class="code">
+                    $ robson [path_to_the_rbsn]
+                </div>
+                <h2>
+                    Compiling and running .robson
+                </h2>
+                <p>
+                    For compiling a .robson you specify a .robson file and add the "compile" flag
+                </p>
+                <div class="code">
+                    $ robson [path_to_robson] compile
+                </div>
+                <p>
+                    For running is the same thing, expect we use the "run" flag
+                </p>
+                <div class="code">
+                    $ robson [path_to_robson] run
+                </div>
+                <p>
+                    All the .rbsn files are placed in the out folder inside your project.
+                </p>
+                <p>
+                    The general usage for the robson cli is:
+                </p>
+                <div class="code">
+                    $ robson { [--flags] || [path_to_file] [file_flags] }
+                </div>
+                <h2>
+                    --flags
+                </h2>
+                <ol>
+                    <li>
+                        --version, display the robson version.
+                    </li>
+                    <li>
+                        --generate, input a string and convert to robson's push
+                    </li>
+                    <li>
+                        --chars, press a key to get its ascii value
+                    </li>
+                </ol>
+                <h2>
+                    file_flags
+                </h2>
+                <ol>
+                    <li>
+                        compile, will compile a .robson into a .rbsn
+                    </li>
+                    <li>
+                        run, will run and compile a .robson
+                    </li>
+                    <li>
+                        time, will show the run time of a .rbsn
+                    </li>
+                    <li>
+                        print, will print the commands of a .rbsn
+                    </li>
+                </ol>
+            </section>
+            <section class="_Basic hidden">
                 <h2>
                     Basic Concepts                    
                 </h2>
