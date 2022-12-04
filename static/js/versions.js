@@ -44,8 +44,12 @@ const versions = [
         version: "0.1.3",
         windows: "/static/versions/0.1.3vWindows.zip",
         linux: "/static/versions/0.1.3vLinux.zip"
-
     },
+    {
+        version: "0.1.4",
+        windows: "/static/versions/0.1.4vWindows.zip",
+        linux: "/static/versions/0.1.4vLinux.zip"
+    }
 ];
 const list = document.getElementById("list");
 if (list) {

@@ -1,5 +1,14 @@
 const versions = [
     {
+        version: "0.1.5",
+        features: [
+            "Added function to change color of text in terminal commands",
+        ],
+        changes: [
+            "Fixed the multiple lambeu glitch in push opcodes"
+        ]
+    },
+    {
         version: "0.1.4",
         features: [
             "Added --chars for getting ascci values",
