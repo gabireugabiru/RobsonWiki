@@ -1,10 +1,10 @@
-const ids = ["Basic", "Opcodes", "Params","Aliases", "Overview", "Cli"];
+const ids = ["Cli", "Basic", "Opcodes", "Params", "Aliases", "Overview"];
 ids.forEach((id, index, array) => {
     const element = document.getElementById(id);
     if (element) {
-        element.onclick =() => {
+        element.onclick = () => {
             hide_sections();
-            const section = element_id(id); 
+            const section = element_id(id);
             if (section) {
                 section.setAttribute("class", `_${id} appear`);
             }
@@ -13,11 +13,11 @@ ids.forEach((id, index, array) => {
     const section_button = document.querySelector(`section._${id} > button`);
     if (section_button) {
         section_button.onclick = () => {
-            if ((ids.length-1) > index) {
+            if ((ids.length - 1) > index) {
                 hide_sections();
                 const section = document.querySelector(`section._${array[index + 1]}`);
                 if (section) {
-                    section.setAttribute("class", `_${array[index+1]} appear`);
+                    section.setAttribute("class", `_${array[index + 1]} appear`);
                 }
             }
         }
@@ -27,7 +27,7 @@ ids.forEach((id, index, array) => {
 const element_id = (id) => document.querySelector(`section._${id}`);
 
 function hide_sections() {
-    window.scrollTo({left: 0, top:0});
+    document.querySelector("main").scrollTo({ left: 0, top: 0 });
     for (const id of ids) {
         let element = element_id(id);
         if (element) {

@@ -2,12 +2,14 @@
     box-sizing: border-box;
     font-family: "Alfa Slab One", serif;
 }
+
 body {
     margin: 0;
     background: var(--primary-background);
     overflow-x: hidden;
     color: var(--default-color);
 }
+
 #root {
     width: 100%;
     height: 100vh;
@@ -24,38 +26,45 @@ body {
     background: var(--secondary-color);
     border-radius: 2rem;
 }
-#theme > div {
+
+#theme>div {
     width: 2.3rem;
     height: 2.3rem;
     border-radius: 50%;
     position: absolute;
-    top : calc((2.5rem - 2.3rem) / 2);
+    top: calc((2.5rem - 2.3rem) / 2);
 }
-#theme.white > div {
+
+#theme.white>div {
     background: #eee;
     left: 2px;
     animation: left 500ms;
 }
-#theme.dark > div {
+
+#theme.dark>div {
     background: #0d0218;
     left: calc(100% - 2.3rem - 2px);
     animation: right 500ms;
 }
+
 @keyframes left {
     from {
         background: #0d0218;
         left: calc(100% - 2.3rem - 2px);
     }
+
     to {
         background: #eee;
         left: 2px;
     }
 }
+
 @keyframes right {
     from {
         background: #eee;
         left: 2px;
     }
+
     to {
         background: #0d0218;
         left: calc(100% - 2.3rem - 2px);
@@ -68,30 +77,37 @@ header {
     padding: 1rem 4rem;
     border-bottom: 1px solid var(--main-border-color);
 }
+
 ul.navbar {
     list-style-type: none;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-ul.navbar > li {
+
+ul.navbar>li {
     font-size: 2rem;
 }
-ul.navbar > li + li  {
-    margin-left: 4rem; 
+
+ul.navbar>li+li {
+    margin-left: 4rem;
 }
-div.logo_svg {
+
+div.logo_svg,
+div.lg {
     width: 100px;
     height: auto;
 }
+
 a {
     font-weight: bold;
     font-size: 2.2rem;
     text-decoration: none;
     color: var(--l-primary-color);
 }
+
 a:hover {
-    color: var(--d-primary-color); 
+    color: var(--d-primary-color);
     text-shadow: 0 0 7px var(--text-shadow);
 }
 
@@ -100,26 +116,31 @@ a:hover {
 a.highlight {
     color: var(--highlight);
 }
+
 div.presentation {
     display: flex;
     flex-direction: column;
 }
-div.presentation > p {
+
+div.presentation>p {
     margin: 0 auto;
     text-align: center;
     font-size: 2rem;
     max-width: 70%;
 }
-div.presentation > h1 {
+
+div.presentation>h1 {
     font-size: 6rem;
     text-align: center;
     font-family: Helvetica, sans-serif;
 }
-div.presentation > h1 > span {
+
+div.presentation>h1>span {
     font-size: 3rem;
     font-weight: lighter;
     color: var(--d-primary-color);
 }
+
 div.why {
     position: relative;
     width: 100vw;
@@ -128,47 +149,57 @@ div.why {
     flex-direction: column;
     padding: 0rem 2rem 8rem 2rem;
 }
-div.why > h2 {
+
+div.why>h2 {
     padding-top: 5rem;
     font-size: 5rem;
     color: var(--highlight);
 }
-div.why > div{
+
+div.why>div {
     margin-top: 4rem;
     justify-content: center;
     display: flex;
 }
-div.why > div > section {
+
+div.why>div>section {
     text-align: justify;
     width: 30%;
     font-size: 1.7rem;
     margin: 0 3%;
     color: var(--secondary-text);
 }
-div.why > div > section > h3 {
+
+div.why>div>section>h3 {
     font-size: 4rem;
     text-align: center;
 }
+
 footer {
     padding: 8rem;
     font-size: 2rem;
 
 }
-footer > div {
+
+footer>div {
     display: flex;
     align-items: center;
 }
-footer > div > div.thumbs {
+
+footer>div>div.t {
     margin-top: 2rem;
 }
-footer > div > div.thumbs > svg {
+
+footer>div>div.t>svg {
     width: 5rem;
     height: 5rem;
 }
-footer > div > div.thumbs > svg path {
+
+footer>div>div.t>svg path {
     stroke: var(--default-color);
     fill: var(--default-color);
 }
+
 div.robson {
     margin-top: 2rem;
     font-size: 4rem;
@@ -176,27 +207,31 @@ div.robson {
     flex-direction: column;
     text-align: center;
 }
+
 img.robson {
     width: 128px;
     margin: 1rem 2rem 20px 2rem;
     border-radius: 1rem;
 }
-div.curves {
+
+div.c {
     display: block;
     width: 100vw;
     margin-top: 15rem;
-    /* margin-left: -13px; */
     margin-bottom: -10px;
 }
-div.curves > svg > g > path{
+
+div.c>svg>g>path {
     fill: var(--secondary-color);
     width: 100vw;
 }
-div.curves.reverse {
+
+div.c.reverse {
     transform: rotate(180deg);
     margin-top: -10px;
     margin-left: 0;
 }
+
 @media only screen and (max-width: 1100px) {
 
     html {
@@ -210,35 +245,41 @@ div.curves.reverse {
     }
 
 }
+
 @media only screen and (max-width: 900px) {
-    main > div.why > div {
+    main>div.why>div {
         flex-direction: column;
     }
-    main > div.why > div > section {
+
+    main>div.why>div>section {
         width: 100%;
         margin: 0;
     }
 }
+
 @media only screen and (max-width: 771px) {
-    
+
     html {
         font-size: 60%;
     }
 
-    header > ul {
+    header>ul {
         flex-direction: column;
         padding: 0;
 
     }
-    header > ul.navbar > li {
+
+    header>ul.navbar>li {
         font-size: 3rem;
-    } 
-    header > ul.navbar > li + li {
+    }
+
+    header>ul.navbar>li+li {
         margin-left: 0;
         margin-top: 1rem;
     }
-    footer > div {
+
+    footer>div {
         flex-direction: column;
     }
-    
+
 }

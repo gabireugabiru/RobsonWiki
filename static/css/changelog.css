@@ -2,12 +2,14 @@
     box-sizing: border-box;
     font-family: "Alfa Slab One", serif;
 }
+
 body {
     margin: 0;
     background: var(--primary-background);
     overflow-x: hidden;
     color: var(--default-color);
 }
+
 #root {
     width: 100%;
     height: 100vh;
@@ -22,20 +24,23 @@ header {
     border-bottom: 1px solid var(--main-border-color);
 }
 
-div.logo_svg {
+div.lg {
     width: 50px;
     height: auto;
     cursor: pointer;
 }
+
 h1 {
     color: var(--l-primary-color);
     font-size: 2rem;
     font-weight: bolder;
 }
+
 main {
     display: flex;
     justify-content: center;
 }
+
 div.list {
     width: 100%;
     max-width: 80%;
@@ -43,30 +48,31 @@ div.list {
     flex-direction: column;
 }
 
-div.version > span.version_header {
+div.version>span.version_header {
     display: flex;
     align-items: center;
     /* border-top: 1px solid var(--main-border-color); */
 }
-div.version > span.version_header > span.line {
+
+div.version>span.version_header>span.line {
     background: var(--main-border-color);
     width: 100%;
     height: 1px;
 }
 
-div.version > span.version_header > h3 {
+div.version>span.version_header>h3 {
     margin: 1rem;
     font-size: 2rem;
 }
 
-div.version > span.version_header > span.extend {
+div.version>span.version_header>span.extend {
     color: green;
     font-size: 2rem;
-    margin-left: 5px ;
+    margin-left: 5px;
     cursor: pointer;
 }
 
-div.version > span.version_header > span.extend.hide {
+div.version>span.version_header>span.extend.hide {
     margin-bottom: 5px;
     color: red;
 }
@@ -78,18 +84,21 @@ div.version > span.version_header > span.extend.hide {
         height: 0px;
         overflow: hidden;
     }
+
     to {
         opacity: 100%;
         height: 300px;
         overflow: hidden;
     }
 }
+
 @keyframes dextend {
     from {
         opacity: 100%;
         height: 300px;
         overflow: hidden;
     }
+
     to {
         opacity: 0%;
         height: 0px;
@@ -102,12 +111,15 @@ div.log.hide {
     height: 0px;
     overflow: hidden;
 }
+
 div.log.animate {
     animation: 200ms extend;
 }
+
 div.log.hide.animate {
     animation: 200ms dextend;
 }
+
 div.log {
     overflow: auto;
     opacity: 100%;
@@ -123,7 +135,8 @@ div.features {
     flex-direction: column;
     padding: .7rem;
 }
-div.features > div.feature + div.feature {
+
+div.features>div.feature+div.feature {
     margin-top: .4rem;
 }
 
@@ -132,9 +145,11 @@ div.changes {
     flex-direction: column;
     padding: .7rem;
 }
-div.changes > div.change + div.change {
+
+div.changes>div.change+div.change {
     margin-top: .4rem;
 }
+
 h4 {
     font-size: 1.7rem;
     margin: .3rem;
